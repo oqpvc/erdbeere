@@ -6,7 +6,7 @@ developing and managing examples) and should be thought of as an
 e-learning tool for higher (i. e., University-level) mathematics.
 
 It aims to store mathematics examples somewhat like the
-[http://ringtheory.herokuapp.com](ring database) and is supposed to
+[ring database](http://ringtheory.herokuapp.com) and is supposed to
 help students explore features of mathematics objects. Consider the
 following questions:
 
@@ -80,13 +80,10 @@ noeth_module = Property.create({name: 'ascending chain condition for ' +
 base_ring_is_lnoeth = Atom.create({stuff_w_props: base_ring, property:
                                    l_noeth})
 module_is_fg = Atom.create({stuff_w_props: rmod, property: fin_gen})
+module_has_acc = Atom.create({stuff_w_props: rmod, property: noeth_module})
 
-module_fin_gen_and_noeth_base_ring = Conjunction.create({atoms:
-                                                          [base_ring_is_lnoeth,
-                                                          module_is_fg]})
-
-fg_and_noeth_base_ring_implies_noeth =Implication.create({conjunction:
-                                                           module_fin_gen_and_noeth_base_ring,
+fg_and_noeth_base_ring_implies_noeth =Implication.create({atoms:
+                                                           [module_is_fg, base_ring_is_lnoeth],
                                                            implies:
                                                            module_has_acc})
 ```
@@ -103,8 +100,8 @@ ExampleTruth.create({example: integers, property: comm, satisfied: true})
 ExampleTruth.create({example: integers, property: l_noeth, satisfied: true})
 ExampleTruth.create({example: integers, property: vnr, satisfied: false})
 
-zee-r = Example.create({structure: rmod})
-BuildingBlockRealization.create({example: zee-r, building_block:
-  base_ring, realization: integers })
-ExampleTruth.create({example: zee-r, property: fin_gen, satisfied: true})
+zee_r = Example.create({structure: rmod})
+BuildingBlockRealization.create({example: zee_r, building_block:
+  base_ring, realization: integers})
+ExampleTruth.create({example: zee_r, property: fin_gen, satisfied: true})
 ```
