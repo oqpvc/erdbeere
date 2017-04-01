@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  example: integers
+  property: comm
+  satisfied: true
+
+two:
+  example: integers
+  property: l_noeth
+  satisfied: true
+
+three:
+  example: integers
+  property: vnr
+  satisfied: false
+
+four:
+  example: zee-r
+  property: fin_gen
+  satisfied: true

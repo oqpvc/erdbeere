@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ring_is_comm:
+  stuff_w_props: ring
+  property: comm
+
+ring_is_lnoeth:
+  stuff_w_props: ring
+  property: l_noeth
+
+ring_is_rnoeth:
+  stuff_w_props: ring
+  property: r_noeth
+
+base_ring_is_lnoeth:
+  stuff_w_props: base_ring
+  property: l_noeth
+
+module_is_fg:
+  stuff_w_props: rmod
+  property: fin_gen
+
+module_is_noeth:
+  stuff_w_props: rmod
+  property: noeth_module

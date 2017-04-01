@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+integers:
+  explanation: Integers
+  structure: ring
+
+zee_r:
+  explanation: $\mathds Z^r$ as a module over the integers
+  structure: rmod

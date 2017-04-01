@@ -1,0 +1,8 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  example: zee_r
+  building_block: base_ring
+  realization: integers
+
+
