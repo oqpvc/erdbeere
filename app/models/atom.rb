@@ -15,6 +15,7 @@ class Atom < ApplicationRecord
   validates :stuff_w_props, presence: true
   validates :property, presence: true
   validates_with SaneAtoms
+  validates :property, :uniqueness => { :scope => :stuff_w_props }
 
   def to_s
     s = ""
