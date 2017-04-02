@@ -10,7 +10,7 @@ It aims to store mathematics examples somewhat like the
 help students explore features of mathematics objects. Consider the
 following questions:
 
-- What does a principal ideal domain that is not Euclidean look like
+- What does a principal ideal domain that is not Euclidean look like?
 - What does a quasi-projective and proper morphism between schemes
   look like, that isn't projective?
 - Is there a ring that is a principal ideal domain, but not a unique
@@ -20,7 +20,7 @@ The first question has a simple enough answer with the ring of
 integers of __Q__(√-19). The second also has an example as the answer,
 but it is worthwhile to know that every quasi-projective proper
 morphism X→Y is projective if Y is qcqs. The third answer of course
-has no example at all.
+has no example at all, as every principal ideal domain is a UFD.
 
 ErDBeere wants to represent all the data in the answers above, i.e.,
 *concrete examples* and *abstract implications*, in the nicest
