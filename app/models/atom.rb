@@ -15,4 +15,10 @@ class Atom < ApplicationRecord
   validates :stuff_w_props, presence: true
   validates :property, presence: true
   validates_with SaneAtoms
+
+  def to_s
+    s = ""
+    s << "#{self.stuff_w_props.name} *IS* #{property.name}"
+    s
+  end
 end
