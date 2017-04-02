@@ -5,5 +5,5 @@ ring:
   definition: A ring $R$ is an abelian group together with a map $R\times R …
 
 rmod:
-  name: $R$-(left-)Modules
+  name: $R$-(left-)Module
 

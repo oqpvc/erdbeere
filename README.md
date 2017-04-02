@@ -5,9 +5,9 @@ Beispielerfassung und -entwicklung” (informative database for
 developing and managing examples) and should be thought of as an
 e-learning tool for higher (i. e., University-level) mathematics.
 
-It aims to store mathematics examples somewhat like the
+It aims to store mathematical examples somewhat like the
 [ring database](http://ringtheory.herokuapp.com) and is supposed to
-help students explore features of mathematics objects. Consider the
+help students explore features of mathematical objects. Consider the
 following questions:
 
 - What does a principal ideal domain that is not Euclidean look like?
@@ -19,7 +19,7 @@ following questions:
 The first question has a simple enough answer with the ring of
 integers of __Q__(√-19). The second also has an example as the answer,
 but it is worthwhile to know that every quasi-projective proper
-morphism X→Y is projective if Y is qcqs. The third answer of course
+morphism X→Y is projective if Y is qcqs. The third question of course
 has no example at all, as every principal ideal domain is a UFD.
 
 ErDBeere wants to represent all the data in the answers above, i.e.,
@@ -29,11 +29,12 @@ possible manner.
 ## Data Structures
 
 The “nicest possible manner” is of course a Web 2.0 application. This
-is hence a *Ruby on Rails* application, which of course isn't all that
-suitable to represent the aforementioned data — especially the
-mathematical implications.
+is hence a *Ruby on Rails* application, which isn't all that suitable
+to represent the aforementioned data — especially the mathematical
+implications.
 
-We will explain the data structures using example pieces of code.
+We will explain the internal data structures using example pieces of
+code.
 
 ### Categories, Properties and Implications
 
@@ -60,12 +61,12 @@ depend on their ground ring. Structures can hence have building
 blocks.
 
 ```ruby
-rmod = Structure.create({name: '$R$-(left-)Modules'})
-base_ring = BuildingBlock.create({name: 'Base ring',
+rmod = Structure.create({name: '$R$-(left-)Module'})
+base_ring = BuildingBlock.create({name: 'base ring',
                                    explained_structure: rmod,
                                    structure: ring, definition: 'A ' +
                                    'ring homomorphism $R\longrightarrow ' +
-                                   '\mathrm{End}(M)$'})
+                                   '\mathrm{End}(M)$ …'})
 ```
 
 Now we want to encode the following result:
