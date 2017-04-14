@@ -15,14 +15,17 @@ class Example < ApplicationRecord
   end
 
   def atoms_from_example_truths
-    truths(:identity)
+    truths(:itself)
   end
 
   def all_that_is_true
     truths(:all_that_follows)
   end
 
-  def truths(fn = :identity)
+  def falsehoods
+    example_truths.where(satisfied: false).map { |f| f.property.to_atom }
+  end
+  def truths(fn = :itself)
     a = []
     if not building_block_realizations.blank?
       a += building_block_realizations.map do |bbr|
