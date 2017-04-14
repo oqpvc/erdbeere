@@ -6,6 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 
+gem 'bulma-rails', '~> 0.4.0'
+gem "font-awesome-rails"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use Puma as the app server

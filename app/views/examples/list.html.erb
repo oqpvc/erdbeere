@@ -1,0 +1,15 @@
+<% provide(:title, 'All the examples we have') %>
+<div class="columns is-multiline">
+    <% Structure.find_each do |s| %>
+        <div class="column">
+            <div class="content">
+                <h2><%= s.name %></h2>
+                <ul>
+                    <% s.examples.each do |e| %>
+                        <li><%= link_to e.explanation[0..50], examples_show_path(:id => e.id) %></li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+</div>

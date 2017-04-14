@@ -7,14 +7,50 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+        });
     </script>
     <script type="text/javascript" async
-	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-1AM_CHTML">
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML-full">
     </script>
   </head>
 
   <body>
-    <%= yield %>
+      <nav class="nav">
+          <div class="nav-left">
+              <h1><%= link_to "ErDBeere", :root, class: "nav-item" %></h1>
+          </div>
+      </nav>
+      <% unless yield(:title).empty? %>
+      <section class="hero is-primary">
+          <div class="hero-body">
+              <div class="container">
+                  <h2 class="title"><%= yield(:title) %></h2>
+              </div>
+          </div>
+      </section>
+      <% end %>
+
+      <section class="section">
+          <div class="container">
+              <%= yield %>
+          </div>
+      </section>
+      <footer class="footer">
+          <div class="container">
+              <div class="content has-text-centered">
+                  <p>
+                      <strong>ErDBeere</strong> is on <a href="https://github.com/oqpvc/erdbeere">GitHub</a>!
+                  </p>
+                  <p><small>Powered by <a href="http://rubyonrails.org">Rails</a>, <a href="http://bulma.io">Bulma</a>, <a href="http://mathjax.org">MathJax</a> and <a href="http://spacemacs.org">Spacemacs</a>.</small></p>
+              </div>
+          </div>
+          <script type="text/javascript">
+              if (window.MathJax) {
+                  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+              }
+          </script>
+      </footer>
   </body>
 </html>
