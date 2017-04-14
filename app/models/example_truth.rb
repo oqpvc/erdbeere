@@ -14,11 +14,15 @@ class ExampleTruth < ApplicationRecord
   validates :property, presence: true
   validates_with SaneExampleTruths
 
-  def violated
-    if @satisfied.nil?
+  def violated?
+    if satisfied.nil?
       nil
     else
-      not @satisfied
+      not satisfied
     end
+  end
+
+  def satisfied?
+    satisfied
   end
 end

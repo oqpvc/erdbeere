@@ -16,6 +16,6 @@ three:
   satisfied: false
 
 four:
-  example: zee-r
+  example: zee_r
   property: fin_gen
   satisfied: true
