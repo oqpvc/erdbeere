@@ -1,3 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/oqpvc/erdbeere/badges/gpa.svg)](https://codeclimate.com/github/oqpvc/erdbeere)
+[![Build Status](https://travis-ci.org/oqpvc/erdbeere.svg?branch=master)](https://travis-ci.org/oqpvc/erdbeere)
+
 # erdbeere
 
 ErDBeere is short for “Erkenntnisfördernde Datenbank zur
@@ -106,3 +109,30 @@ BuildingBlockRealization.create({example: zee_r, building_block:
   base_ring, realization: integers})
 ExampleTruth.create({example: zee_r, property: fin_gen, satisfied: true})
 ```
+
+### Using the logic engine
+
+The internal logic engine is as stupid as one get away with. I assume that it is
+hence very slow, which still might be fast enough for practical purposes.
+Working with it roughly looks like this:
+
+```ruby
+zee_r.satisfies?(module_has_acc)
+zee_r.satisfies?(Atom.find_or_create_by({stuff_w_props:
+                                                   building_blocks(:base_ring),
+                                                   property:
+                                                   properties(:r_noeth)}))
+zee_r.all_that_is_true.each do |a|
+  puts a.to_s
+end
+```
+
+As one can see, the implications on the level of examples work recursively: Even
+though we never had an ExampleTruth that stated that for commutative *base
+rings* (and not *rings*) left and right Noetherian are equivalent, the logic
+engine derives those kind of statements from the bottom up.
+
+In contrast to that, we cannot encode implications from the top down (such as:
+the existence of a separated morphism X→ Y with Y separated as a scheme implies
+that X is itself separated, where we view X and Y as the building blocks
+*domain* and *codomain* of the structure *scheme morphism*).
