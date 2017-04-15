@@ -1,4 +1,4 @@
-<% provide(:title, 'All the examples I have') %>
+<% provide(:title, I18n.t('examples.list.title')) %>
 <div class="columns is-multiline">
     <% Structure.find_each do |s| %>
         <div class="column">

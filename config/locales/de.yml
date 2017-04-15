@@ -1,0 +1,45 @@
+---
+de:
+  building_block_realizations:
+    show:
+      hardcoded_falsehoods: Hinterlegte Verletzungen
+      hardcoded_truths: Hinterlegte Wahrheiten
+  examples:
+    find:
+      direct_hits: Direkte Treffer
+      explanation: Erklärung
+      flash:
+        no_search_params: Du hast nach nichts gesucht!
+        nothing_found: Ein solches Objekt kenne ich nicht ☹
+        violates_logic: So etwas kann es nicht geben!
+      still_consistent: Konsistente weitere Treffer
+      title: Suchergebnisse
+    list:
+      title: Alle Beispiele, die ich kenne
+    show:
+      building_blocks: Bausteine
+      derived_truths: Abgeleitete Wahrheiten
+      explanation: Erklärung
+      hardcoded_falsehoods: Hinterlegte Verletzungen
+      hardcoded_truths: Hinterlegte Wahrheiten
+    violates_logic:
+      i_found_the_following_contradiction: Ich habe folgenden Widerspruch gefunden
+      the_following_additional_truths_were_derived: Die folgenden Eigenschaften wurden
+        abgeleitet
+      you_were_looking_for_an_object_with_the_following_falsehoods: Du hast nach einem
+        Objekt gesucht, welches folgendes verletzt
+      you_were_looking_for_an_object_with_the_following_truths: Du hast nach einem
+        Objekt gesucht, welches folgendes erfüllt
+  layouts:
+    application:
+      error: Fehler
+      notice: Nachricht
+      search: Suche
+      warning: Warnung
+  main:
+    search:
+      satisfies: Erfüllt
+      search: Suche
+      search_button: Suchen!
+      title: Nach einem Objekt suchen
+      violates: Verletzt

@@ -1,4 +1,4 @@
-<% provide(:title, 'Search for object') %>
+<% provide(:title, I18n.t('main.search.title')) %>
 
 <div class="columns">
     <div class="column is-3">
@@ -61,7 +61,7 @@
                     </div>
                     <% end %>
                     </div>
-                    <%= submit_tag('Search!', class: 'button') %>
+                    <%= submit_tag(I18n.t('main.search.search_button'), class: 'button') %>
                 </div>
             <% end %>
         <% end %>

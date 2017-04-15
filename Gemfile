@@ -11,7 +11,7 @@ gem "font-awesome-rails"
 gem 'i18n-tasks', '~> 0.9.13'
 gem 'globalize', git: 'https://github.com/globalize/globalize'
 gem 'activemodel-serializers-xml'
-
+gem 'rails-i18n'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use Puma as the app server

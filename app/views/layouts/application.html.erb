@@ -20,20 +20,20 @@
               <section class="hero is-danger" data-temporary="true">
                   <div class="hero-body">
                       <div class="container">
-                          <h2 class="title"><%= I18n.t("layouts.application.error", :default => "Error") %></h2>
-                          <%= content_tag(:h3, flash[:error], class: 'subtitle')%>
+                          <h2 class="subtitle"><%= I18n.t("layouts.application.error", :default => "Error") %></h2>
+                          <%= content_tag(:h2, flash[:error], class: 'title')%>
           <% elsif not flash[:warning].blank? %>
               <section class="hero is-warning"  data-temporary="true">
                   <div class="hero-body">
                       <div class="container">
-                         <h2 class="title"><%= I18n.t("layouts.application.warning", :default => "Warning") %></h2>
-                         <%= content_tag(:h3, flash[:warning], class: 'subtitle')%>
+                         <h2 class="subtitle"><%= I18n.t("layouts.application.warning", :default => "Warning") %></h2>
+                         <%= content_tag(:h3, flash[:warning], class: 'title')%>
           <% else %>
               <section class="hero is-notice" data-temporary="true">
                   <div class="hero-body">
                       <div class="container">
-                          <h2 class="title"><%= I18n.t("layouts.application.notice", :default => "Notice") %></h2>
-                          <%= content_tag(:h3, flash.join("\n"), class: 'subtitle')%>
+                          <h2 class="subtitle"><%= I18n.t("layouts.application.notice", :default => "Notice") %></h2>
+                          <%= content_tag(:h3, flash.join("\n"), class: 'title')%>
           <% end %>
                       </div>
                   </div>

@@ -1,4 +1,4 @@
-<% provide(:title, 'Search results') %>
+<% provide(:title, I18n.t('examples.find.title')) %>
 
 <% unless @hits.blank? %>
 <h2 class="title"><%= I18n.t("examples.find.direct_hits", :default => "Direct hits") %></h2>

@@ -9,13 +9,13 @@ class ExamplesController < ApplicationController
     @violates = params[:violates].to_a.map { |i| Atom.find(i.to_i) }.to_a
 
     if (@satisfies + @violates).empty? then
-      flash[:error] = 'You didn\'t look for anything.'
+      flash[:error] = I18n.t('examples.find.flash.no_search_params')
       redirect_to main_search_path
     end
 
     @all_that_is_satisfied = @satisfies.all_that_follows.to_a
     unless (@all_that_is_satisfied & @violates).empty?
-      flash.now[:error] = "Such an object cannot exist"
+      flash.now[:error] = I18n.t('examples.find.flash.violates_logic')
       render 'violates_logic'
     end
 
@@ -26,7 +26,7 @@ class ExamplesController < ApplicationController
     end
     
     if @almost_hits.empty? then
-      flash.now[:warning] = "I don't know of any such object ☹"
+      flash.now[:warning] = I18n.t('examples.find.flash.nothing_found')
     else
       @hits = @almost_hits.find_all do |e|
         (@violates - e.all_that_is_violated).empty?

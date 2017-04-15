@@ -1,23 +1,45 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  hello: "Hello world"
+  building_block_realizations:
+    show:
+      hardcoded_falsehoods: Hardcoded falsehoods
+      hardcoded_truths: Hardcoded truths
+  examples:
+    find:
+      direct_hits: Direct hits
+      explanation: Explanation
+      flash:
+        no_search_params: You didn\'t look for anything!
+        nothing_found: I don\'t know of any such object ☹
+        violates_logic: Such an object cannot exist!
+      still_consistent: Still consistent
+      title: Search results
+    list:
+      title: All examples that I know of
+    show:
+      building_blocks: Building blocks
+      derived_truths: Derived truths
+      explanation: Explanation
+      hardcoded_falsehoods: Hardcoded falsehoods
+      hardcoded_truths: Hardcoded truths
+    violates_logic:
+      i_found_the_following_contradiction: I found the following contradiction
+      the_following_additional_truths_were_derived: The following additional truths
+        were derived
+      you_were_looking_for_an_object_with_the_following_falsehoods: You were looking
+        for an object with the following falsehoods
+      you_were_looking_for_an_object_with_the_following_truths: You were looking for
+        an object with the following truths
+  layouts:
+    application:
+      error: Error
+      notice: Notice
+      search: Search
+      warning: Warning
+  main:
+    search:
+      satisfies: Satisfies
+      search: Search
+      search_button: Search!
+      title: Search for an object
+      violates: Violates
