@@ -5,5 +5,5 @@ integers:
   structure: ring
 
 zee_r:
-  explanation: $\mathds Z^r$ as a module over the integers
+  explanation: $\mathbb Z^r$ as a module over the integers
   structure: rmod
