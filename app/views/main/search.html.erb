@@ -21,7 +21,7 @@
   </div>
   <div class="column">
     <% Structure.find_each do |s| %>
-      <%= form_tag('/examples/find', method: 'post', id: 'structure-form-'+s.id.to_s) do %>
+      <%= form_tag(examples_find_path, method: 'post', id: 'structure-form-'+s.id.to_s) do %>
         <%= hidden_field_tag 'structure_id', s.id %>
         <div class="content box">
           <h2 class="title"><%= s.name %></h2>

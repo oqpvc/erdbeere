@@ -12,8 +12,8 @@ en:
       direct_hits: Direct hits
       explanation: Explanation
       flash:
-        no_search_params: You didn\'t look for anything!
-        nothing_found: I don\'t know of any such object ☹
+        no_search_params: You didn't look for anything!
+        nothing_found: I don't know of any such object ☹
         violates_logic: Such an object cannot exist!
       still_consistent: Still consistent
       title: Search results
