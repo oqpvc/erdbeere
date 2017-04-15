@@ -1,35 +1,31 @@
 <% provide(:title, I18n.t('examples.find.title')) %>
-
 <% unless @hits.blank? %>
-<h2 class="title"><%= I18n.t("examples.find.direct_hits", :default => "Direct hits") %></h2>
-
-<div class="tile is-ancestor is-vertical">
+  <h2 class="title"><%= I18n.t("examples.find.direct_hits", :default => "Direct hits") %></h2>
+  <div class="tile is-ancestor is-vertical">
     <% @hits.each_slice(3).each do |slice| %>
-        <div class="tile is-parent">
-            <% slice.each do |hit| %>
-                <div class="tile content is-child">
-                    <h3 class="title"><%= link_to I18n.t("examples.find.explanation", :default => 'Explanation'), examples_show_path(id: hit.id)%></h3>
-                    <%= content_tag(:p, hit.explanation) %>
-                </div>
-            <% end %>
-        </div>
+      <div class="tile is-parent">
+        <% slice.each do |hit| %>
+          <div class="tile content is-child">
+            <h3 class="title"><%= link_to I18n.t("examples.find.explanation", :default => 'Explanation'), examples_show_path(id: hit.id)%></h3>
+            <%= content_tag(:p, hit.explanation) %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-</div>
+  </div>
 <% end %>
 <% unless (@almost_hits-@hits.to_a).blank? %>
-
-<h2 class="title"><%= I18n.t("examples.find.still_consistent", :default => "Still consistent") %></h2>
-
-<div class="tile is-ancestor">
+  <h2 class="title"><%= I18n.t("examples.find.still_consistent", :default => "Still consistent") %></h2>
+  <div class="tile is-ancestor">
     <% (@almost_hits - @hits).each_slice(3).each do |slice| %>
-        <div class="tile is-parent">
-            <% slice.each do |hit| %>
-                <div class="tile content is-child">
-                    <h3 class="title"><%= I18n.t("examples.find.explanation", :default => "Explanation") %></h3>
-                    <%= content_tag(:p, hit.explanation) %>
-                </div>
-            <% end %>
-        </div>
+      <div class="tile is-parent">
+        <% slice.each do |hit| %>
+          <div class="tile content is-child">
+            <h3 class="title"><%= I18n.t("examples.find.explanation", :default => "Explanation") %></h3>
+            <%= content_tag(:p, hit.explanation) %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-</div>
+  </div>
 <% end %>

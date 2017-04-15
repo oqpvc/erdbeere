@@ -1,63 +1,61 @@
 <% provide(:title, I18n.t('example.show.title') + ' ' + @example.explanation[0..50]) %>
-
 <div class="tile is-ancestor">
-    <div class="tile is-vertical is-parent is-9">
-        <article class="tile is-child notification is-info">
-            <div class="content">
-            <h3 class="title"><%= I18n.t("examples.show.explanation", :default => "Explanation") %></h3>
-            <p><%= @example.explanation %></p>
-            </div>
-        </article>
-        <article class="tile is-child notification is-success">
-            <div class="content">
-            <h3 class="title"><%= I18n.t("examples.show.hardcoded_truths", :default => "Hardcoded Truths") %></h3>
-            <ul>
-                <% @example.atoms_from_example_truths.each do |atom| %>
-                    <% if atom.stuff_w_props == @example.structure %>
-                        <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is' %>
-                    <% end %>
-                <% end %>
-            </ul>
-            </div>
-        </article>
-        <% unless @example.falsehoods.empty? %>
-        <article class="tile is-child notification is-danger">
-            <div class="content">
-            <h3 class="title"><%= I18n.t("examples.show.hardcoded_falsehoods", :default => "Hardcoded Falsehoods") %></h3>
-            <ul id="falsehoods">
-                <% @example.falsehoods.each do |atom| %>
-                    <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is_not' %>
-                <% end %>
-            </ul>
-            </div>
-        </article>
-        <% end %>
-        <% unless @example.building_block_realizations.empty? %>
-            <div class="tile is-child">
-                <div class="content box">
-                    <h3 class="title"><%= I18n.t("examples.show.building_blocks", :default => "Building Blocks") %></h3>
-                    <div class="tile is-ancestor">
-                        <div class="tile is-parent">
-                            <% @example.building_block_realizations.each do |bbr| %>
-                                <%= render 'building_block_realizations/show', bbr: bbr %>
-                        <% end %>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        <% end %>
-    </div>
-    <div class="tile is-parent">
+  <div class="tile is-vertical is-parent is-9">
+    <article class="tile is-child notification is-info">
+      <div class="content">
+        <h3 class="title"><%= I18n.t("examples.show.explanation", :default => "Explanation") %></h3>
+        <p><%= @example.explanation %></p>
+      </div>
+    </article>
     <article class="tile is-child notification is-success">
+      <div class="content">
+        <h3 class="title"><%= I18n.t("examples.show.hardcoded_truths", :default => "Hardcoded Truths") %></h3>
+        <ul>
+          <% @example.atoms_from_example_truths.each do |atom| %>
+            <% if atom.stuff_w_props == @example.structure %>
+              <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is' %>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+    <% unless @example.falsehoods.empty? %>
+      <article class="tile is-child notification is-danger">
         <div class="content">
+          <h3 class="title"><%= I18n.t("examples.show.hardcoded_falsehoods", :default => "Hardcoded Falsehoods") %></h3>
+          <ul id="falsehoods">
+            <% @example.falsehoods.each do |atom| %>
+              <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is_not' %>
+            <% end %>
+          </ul>
+        </div>
+      </article>
+    <% end %>
+    <% unless @example.building_block_realizations.empty? %>
+      <div class="tile is-child">
+        <div class="content box">
+          <h3 class="title"><%= I18n.t("examples.show.building_blocks", :default => "Building Blocks") %></h3>
+          <div class="tile is-ancestor">
+            <div class="tile is-parent">
+              <% @example.building_block_realizations.each do |bbr| %>
+                <%= render 'building_block_realizations/show', bbr: bbr %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child notification is-success">
+      <div class="content">
         <h3 class="title"><%= I18n.t("examples.show.derived_truths", :default => "Derived truths") %></h3>
         <ul>
-            <% (@example.all_that_is_true - @example.atoms_from_example_truths).each do |atom| %>
-                <%= render 'atoms/show', atom: atom, modifier: 'logic.is' %>
-            <% end %>
+          <% (@example.all_that_is_true - @example.atoms_from_example_truths).each do |atom| %>
+            <%= render 'atoms/show', atom: atom, modifier: 'logic.is' %>
+          <% end %>
         </ul>
-        </div>
+      </div>
     </article>
-    </div>
+  </div>
 </div>
-    

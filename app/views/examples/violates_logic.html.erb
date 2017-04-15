@@ -1,45 +1,45 @@
 <% provide(:title, 'Logic error') %>
 <div class="tile is-ancestor">
-    <div class="tile is-parent">
-        <article class="tile is-child notification is-success">
-            <div class="content">
-                <h3 class="title"><%= I18n.t("examples.violates_logic.you_were_looking_for_an_object_with_the_following_truths", :default => "You were looking for an object with the following truths:") %></h3>
-                <ul>
-                    <% @satisfies.each do |atom| %>
-                        <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is' %>
-                    <% end %>
-                </ul>
-            </div>
-        </article>
-        <article class="tile is-child notification is-success">
-            <div class="content">
-                <h3 class="title"><%= I18n.t("examples.violates_logic.the_following_additional_truths_were_derived", :default => "The following additional truths were derived:") %></h3>
-                <ul>
-                    <% (@all_that_is_satisfied - @satisfies).each do |atom| %>
-                        <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is' %>
-                    <% end %>
-                </ul>
-            </div>
-        </article>
-        <article class="tile is-child notification is-warning">
-            <div class="content">
-                <h3 class="title"><%= I18n.t("examples.violates_logic.you_were_looking_for_an_object_with_the_following_falsehoods", :default => "You were looking for an object with the following falsehoods:") %></h3>
-                <ul>
-                    <% @violates.each do |atom| %>
-                        <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is_not' %>
-                    <% end %>
-                </ul>
-            </div>
-        </article>
-        <article class="tile is-child notification is-danger">
-            <div class="content">
-                <h3 class="title"><%= I18n.t("examples.violates_logic.i_found_the_following_contradiction", :default => "I found the following contradiction:") %></h3>
-                <ul>
-                    <% (@all_that_is_satisfied & @violates).each do |atom| %>
-                            <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is_and_is_not' %>
-                    <% end %>
-                </ul>
-            </div>
-        </article>
-    </div>
+  <div class="tile is-parent">
+    <article class="tile is-child notification is-success">
+      <div class="content">
+        <h3 class="title"><%= I18n.t("examples.violates_logic.you_were_looking_for_an_object_with_the_following_truths", :default => "You were looking for an object with the following truths:") %></h3>
+        <ul>
+          <% @satisfies.each do |atom| %>
+            <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is' %>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+    <article class="tile is-child notification is-success">
+      <div class="content">
+        <h3 class="title"><%= I18n.t("examples.violates_logic.the_following_additional_truths_were_derived", :default => "The following additional truths were derived:") %></h3>
+        <ul>
+          <% (@all_that_is_satisfied - @satisfies).each do |atom| %>
+            <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is' %>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+    <article class="tile is-child notification is-warning">
+      <div class="content">
+        <h3 class="title"><%= I18n.t("examples.violates_logic.you_were_looking_for_an_object_with_the_following_falsehoods", :default => "You were looking for an object with the following falsehoods:") %></h3>
+        <ul>
+          <% @violates.each do |atom| %>
+            <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is_not' %>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+    <article class="tile is-child notification is-danger">
+      <div class="content">
+        <h3 class="title"><%= I18n.t("examples.violates_logic.i_found_the_following_contradiction", :default => "I found the following contradiction:") %></h3>
+        <ul>
+          <% (@all_that_is_satisfied & @violates).each do |atom| %>
+            <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is_and_is_not' %>
+          <% end %>
+        </ul>
+      </div>
+    </article>
+  </div>
 </div>

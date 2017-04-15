@@ -3,67 +3,64 @@
   <head>
     <title>ErDBeere</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-      <nav class="nav">
-          <div class="nav-left">
-              <h1><%= link_to "ErDBeere", :root, class: "nav-item" %></h1>
-          </div>
-          <div class="nav-center"><%= link_to I18n.t("layouts.application.search", :default => 'Search'), main_search_path, class: 'nav-item' %></div>
-      </nav>
-      <% if flash.any? %>
-          <% if not flash[:error].blank? %>
-              <section class="hero is-danger" data-temporary="true">
-                  <div class="hero-body">
-                      <div class="container">
-                          <h2 class="subtitle"><%= I18n.t("layouts.application.error", :default => "Error") %></h2>
-                          <%= content_tag(:h2, flash[:error], class: 'title')%>
-          <% elsif not flash[:warning].blank? %>
+    <nav class="nav">
+      <div class="nav-left">
+        <h1><%= link_to "ErDBeere", :root, class: "nav-item" %></h1>
+      </div>
+      <div class="nav-center"><%= link_to I18n.t("layouts.application.search", :default => 'Search'), main_search_path, class: 'nav-item' %></div>
+    </nav>
+    <% if flash.any? %>
+      <% if not flash[:error].blank? %>
+        <section class="hero is-danger" data-temporary="true">
+          <div class="hero-body">
+            <div class="container">
+              <h2 class="subtitle"><%= I18n.t("layouts.application.error", :default => "Error") %></h2>
+              <%= content_tag(:h2, flash[:error], class: 'title')%>
+            <% elsif not flash[:warning].blank? %>
               <section class="hero is-warning"  data-temporary="true">
-                  <div class="hero-body">
-                      <div class="container">
-                         <h2 class="subtitle"><%= I18n.t("layouts.application.warning", :default => "Warning") %></h2>
-                         <%= content_tag(:h3, flash[:warning], class: 'title')%>
-          <% else %>
-              <section class="hero is-notice" data-temporary="true">
-                  <div class="hero-body">
-                      <div class="container">
+                <div class="hero-body">
+                  <div class="container">
+                    <h2 class="subtitle"><%= I18n.t("layouts.application.warning", :default => "Warning") %></h2>
+                    <%= content_tag(:h3, flash[:warning], class: 'title')%>
+                  <% else %>
+                    <section class="hero is-notice" data-temporary="true">
+                      <div class="hero-body">
+                        <div class="container">
                           <h2 class="subtitle"><%= I18n.t("layouts.application.notice", :default => "Notice") %></h2>
                           <%= content_tag(:h3, flash.join("\n"), class: 'title')%>
-          <% end %>
+                        <% end %>
                       </div>
-                  </div>
-              </section>
-      <% else %>
-              <% unless yield(:title).empty? %>
-                  <section class="hero is-primary">
-                      <div class="hero-body">
-                          <div class="container">
-                              <h2 class="title"><%= yield(:title) %></h2>
-                          </div>
-                      </div>
+                    </div>
                   </section>
+                <% else %>
+                  <% unless yield(:title).empty? %>
+                    <section class="hero is-primary">
+                      <div class="hero-body">
+                        <div class="container">
+                          <h2 class="title"><%= yield(:title) %></h2>
+                        </div>
+                      </div>
+                    </section>
                   <% end %>
-      <% end %>
-
-      <section class="section">
-          <div class="container">
-              <%= yield %>
-          </div>
-      </section>
-      <footer class="footer">
-          <div class="container">
-              <div class="content has-text-centered">
-                  <p>
-                      <strong>ErDBeere</strong> is on <a href="https://github.com/oqpvc/erdbeere">GitHub</a>!
-                  </p>
-                  <p><small>Powered by <a href="http://rubyonrails.org">Rails</a>, <a href="http://bulma.io">Bulma</a>, <a href="http://mathjax.org">MathJax</a> and <a href="http://spacemacs.org">Spacemacs</a>.</small></p>
-              </div>
-          </div>
-      </footer>
-  </body>
-</html>
+                <% end %>
+                <section class="section">
+                  <div class="container">
+                    <%= yield %>
+                  </div>
+                </section>
+                <footer class="footer">
+                  <div class="container">
+                    <div class="content has-text-centered">
+                      <p>
+                        <strong>ErDBeere</strong> is on <a href="https://github.com/oqpvc/erdbeere">GitHub</a>!
+                      </p>
+                      <p><small>Powered by <a href="http://rubyonrails.org">Rails</a>, <a href="http://bulma.io">Bulma</a>, <a href="http://mathjax.org">MathJax</a> and <a href="http://spacemacs.org">Spacemacs</a>.</small></p>
+                    </div>
+                  </div>
+                </footer>
+              </body>
+            </html>
