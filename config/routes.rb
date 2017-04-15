@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   get 'atoms/show'
-
   get 'examples/show'
+  post 'examples/find'
+  
+  match 'search', :as => 'main_search', :via => :get, :to => 'main#search'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root :to => "examples#list"
 end

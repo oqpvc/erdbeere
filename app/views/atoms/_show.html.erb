@@ -1,1 +1,2 @@
-<li><%= atom.stuff_w_props.name %> <strong>is</strong> <%= atom.property.name %></li>
+<% modifier = 'is' if local_assigns[:modifier].nil? %>
+<li><%= atom.stuff_w_props.name %> <strong><%= modifier %></strong> <%= atom.property.name %></li>

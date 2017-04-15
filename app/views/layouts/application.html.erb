@@ -6,14 +6,6 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
-        });
-    </script>
-    <script type="text/javascript" async
-	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML-full">
-    </script>
   </head>
 
   <body>
@@ -21,15 +13,41 @@
           <div class="nav-left">
               <h1><%= link_to "ErDBeere", :root, class: "nav-item" %></h1>
           </div>
+          <div class="nav-center"><%= link_to 'Search', main_search_path, class: 'nav-item' %></div>
       </nav>
-      <% unless yield(:title).empty? %>
-      <section class="hero is-primary">
-          <div class="hero-body">
-              <div class="container">
-                  <h2 class="title"><%= yield(:title) %></h2>
-              </div>
-          </div>
-      </section>
+      <% if flash.any? %>
+          <% if not flash[:error].blank? %>
+              <section class="hero is-danger" data-temporary="true">
+                  <div class="hero-body">
+                      <div class="container">
+                          <h2 class="title">Error</h2>
+                          <%= content_tag(:h3, flash[:error], class: 'subtitle')%>
+          <% elsif not flash[:warning].blank? %>
+              <section class="hero is-warning"  data-temporary="true">
+                  <div class="hero-body">
+                      <div class="container">
+                         <h2 class="title">Warning</h2>
+                         <%= content_tag(:h3, flash[:warning], class: 'subtitle')%>
+          <% else %>
+              <section class="hero is-notice" data-temporary="true">
+                  <div class="hero-body">
+                      <div class="container">
+                          <h2 class="title">Notice</h2>
+                          <%= content_tag(:h3, flash.join("\n"), class: 'subtitle')%>
+          <% end %>
+                      </div>
+                  </div>
+              </section>
+      <% else %>
+              <% unless yield(:title).empty? %>
+                  <section class="hero is-primary">
+                      <div class="hero-body">
+                          <div class="container">
+                              <h2 class="title"><%= yield(:title) %></h2>
+                          </div>
+                      </div>
+                  </section>
+                  <% end %>
       <% end %>
 
       <section class="section">
@@ -46,11 +64,6 @@
                   <p><small>Powered by <a href="http://rubyonrails.org">Rails</a>, <a href="http://bulma.io">Bulma</a>, <a href="http://mathjax.org">MathJax</a> and <a href="http://spacemacs.org">Spacemacs</a>.</small></p>
               </div>
           </div>
-          <script type="text/javascript">
-              if (window.MathJax) {
-                  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-              }
-          </script>
       </footer>
   </body>
 </html>

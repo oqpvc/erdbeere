@@ -5,7 +5,7 @@ class Structure < ApplicationRecord
     inverse_of: :explained_structure
 
   has_many :atoms, as: :stuff_w_props
-  has_many :building_blocks, inverse_of: :structure
+  #has_many :building_blocks, inverse_of: :structure
 
   def structure
     self
