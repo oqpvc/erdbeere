@@ -56,12 +56,12 @@ end
 
 Implication.create do |i|
   i.atoms = [comm.to_atom, l_noeth.to_atom]
-  i.implies = r_noeth
+  i.implies = r_noeth.to_atom
 end
 
 Implication.create do |i|
   i.atoms = [comm.to_atom, r_noeth.to_atom]
-  i.implies = l_noeth
+  i.implies = l_noeth.to_atom
 end
 
 fin_gen = Property.create({name_en: 'finitely generated', structure: rmod})
