@@ -3,7 +3,7 @@
 <div class="columns">
     <div class="column is-3">
 <aside class="menu">
-    <p class="menu-label">Search</p>
+    <p class="menu-label"><%= I18n.t("main.search.search", :default => "Search") %></p>
     <ul class="menu-list">
         <% Structure.find_each do |s| %>
             <li>
@@ -29,11 +29,11 @@
                     <div class="tile is-ancestor is-vertical">
                     <div class="tile is-parent">
                         <div class="tile is-child notification is-success">
-                            <%= label_tag(:satisfies, 'Satisfies:', class: 'label') %>
+                            <%= label_tag(:satisfies, I18n.t("main.search.satisfies", :default => 'Satisfies:'), class: 'label') %>
                             <%= select_tag(:satisfies, options_for_select(s.properties.map { |p| [p.name, p.to_atom.id] }), multiple: true, class: 'multi-select') %>
                         </div>
                         <div class="tile is-child notification is-danger">
-                            <%= label_tag(:violates, 'Violates:', class: 'label') %>
+                            <%= label_tag(:violates, I18n.t("main.search.violates", :default => 'Violates:'), class: 'label') %>
                             <%= select_tag(:violates, options_for_select(s.properties.map { |p| [p.name, p.to_atom.id] }), multiple: true, class: 'multi-select') %>
                         </div>
                     </div>
@@ -46,11 +46,11 @@
                                 <div class="tile is-ancestor">
                                     <div class="tile is-parent">
                                         <div class="tile is-child notification is-success">
-                                            <%= label_tag(:satisfies, 'Satisfies:', class: 'label') %>
+                                            <%= label_tag(:satisfies, I18n.t("main.search.satisfies", :default => 'Satisfies:'), class: 'label') %>
                                             <%= select_tag(:satisfies, options_for_select(bb.structure.properties.map { |p| [p.name, p.to_atom(bb).id] }), multiple: true, class: 'multi-select') %>
                                         </div>
                                         <div class="tile is-child notification is-danger">
-                                            <%= label_tag(:violates, 'Violates:', class: 'label') %>
+                                            <%= label_tag(:violates, I18n.t("main.search.violates", :default => 'Violates:'), class: 'label') %>
                                             <%= select_tag(:violates, options_for_select(bb.structure.properties.map { |p| [p.name, p.to_atom(bb).id] }), multiple: true, class: 'multi-select') %>
                                         </div>
                                     </div>

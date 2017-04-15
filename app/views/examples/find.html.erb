@@ -1,14 +1,14 @@
 <% provide(:title, 'Search results') %>
 
 <% unless @hits.blank? %>
-<h2 class="title">Direct hits</h2>
+<h2 class="title"><%= I18n.t("examples.find.direct_hits", :default => "Direct hits") %></h2>
 
 <div class="tile is-ancestor is-vertical">
     <% @hits.each_slice(3).each do |slice| %>
         <div class="tile is-parent">
             <% slice.each do |hit| %>
                 <div class="tile content is-child">
-                    <h3 class="title"><%= link_to 'Explanation', examples_show_path(id: hit.id)%></h3>
+                    <h3 class="title"><%= link_to I18n.t("examples.find.explanation", :default => 'Explanation'), examples_show_path(id: hit.id)%></h3>
                     <%= content_tag(:p, hit.explanation) %>
                 </div>
             <% end %>
@@ -18,14 +18,14 @@
 <% end %>
 <% unless (@almost_hits-@hits.to_a).blank? %>
 
-<h2 class="title">Still consistent</h2>
+<h2 class="title"><%= I18n.t("examples.find.still_consistent", :default => "Still consistent") %></h2>
 
 <div class="tile is-ancestor">
     <% (@almost_hits - @hits).each_slice(3).each do |slice| %>
         <div class="tile is-parent">
             <% slice.each do |hit| %>
                 <div class="tile content is-child">
-                    <h3 class="title">Explanation</h3>
+                    <h3 class="title"><%= I18n.t("examples.find.explanation", :default => "Explanation") %></h3>
                     <%= content_tag(:p, hit.explanation) %>
                 </div>
             <% end %>

@@ -6,7 +6,7 @@
             <div class="tile is-parent is-vertical">
                 <article class="tile is-child notification is-success">
                     <div class="content">
-                        <h5 class="title">Hardcoded Truths</h5>
+                        <h5 class="title"><%= I18n.t("building_block_realizations.show.hardcoded_truths", :default => "Hardcoded Truths") %></h5>
                         <ul>
                             <% bbr.realization.atoms_from_example_truths.each do |atom| %>
                                 <%= render 'atoms/show', atom: atom %>
@@ -17,7 +17,7 @@
                 <% unless bbr.realization.falsehoods.empty? %>
                     <article class="tile is-child notification is-danger">
                         <div class="content">
-                            <h5 class="title">Hardcoded Falsehoods</h5>
+                            <h5 class="title"><%= I18n.t("building_block_realizations.show.hardcoded_falsehoods", :default => "Hardcoded Falsehoods") %></h5>
                             <ul id="falsehoods">
                                 <% bbr.realization.falsehoods.each do |atom| %>
                                     <%= render 'atoms/show', atom: atom, modifier: 'is not' %>
@@ -35,13 +35,13 @@
     <div class="box">
 <article class="tile is-child">
     <div class="content">
-        <h4 class="title"><%= bbr.building_block.name %></h4>
-        <p><%= link_to bbr.realization.explanation, examples_show_path(:id => bbr.realization.id) %></p>
+        <h4 class="title">I18n.t("building_block_realizations.show.<%=_bbrbuilding_blockname_%>", :default => "<%= bbr.building_block.name %>")</h4>
+        <p>I18n.t("building_block_realizations.show.<%=_link_to_bbrrealizationexplanation_examples_show_pathid_=>_bbrrealizationid_%>", :default => "<%= link_to bbr.realization.explanation, examples_show_path(:id => bbr.realization.id) %>")</p>
     </div>
 </article>
 <article class="tile is-child notification is-success">
     <div class="content">
-        <h5 class="title">Hardcoded Truths</h5>
+        <h5 class="title"><%= I18n.t("building_block_realizations.show.hardcoded_truths", :default => "Hardcoded Truths") %></h5>
         <ul>
             <% bbr.realization.atoms_from_example_truths.each do |atom| %>
                 <%= render 'atoms/show', atom: atom %>
@@ -52,7 +52,7 @@
 <% unless bbr.realization.falsehoods.empty? %>
     <article class="tile is-child notification is-danger">
         <div class="content">
-            <h5 class="title">Hardcoded Falsehoods</h5>
+            <h5 class="title"><%= I18n.t("building_block_realizations.show.hardcoded_falsehoods", :default => "Hardcoded Falsehoods") %></h5>
             <ul id="falsehoods">
                 <% bbr.realization.falsehoods.each do |atom| %>
                     <%= render 'atoms/show', atom: atom %>
