@@ -54,6 +54,16 @@ base_ring = BuildingBlock.create do |b|
 
 end
 
+Implication.create do |i|
+  i.atoms = [comm.to_atom, l_noeth.to_atom]
+  i.implies = r_noeth
+end
+
+Implication.create do |i|
+  i.atoms = [comm.to_atom, r_noeth.to_atom]
+  i.implies = l_noeth
+end
+
 fin_gen = Property.create({name_en: 'finitely generated', structure: rmod})
 noeth_module = Property.create({name_en: 'ascending chain condition for ' +
                                'submodules', structure: rmod})
@@ -63,12 +73,11 @@ base_ring_is_lnoeth = Atom.create({stuff_w_props: base_ring, property:
 module_is_fg = Atom.create({stuff_w_props: rmod, property: fin_gen})
 module_has_acc = Atom.create({stuff_w_props: rmod, property: noeth_module})
 
-fg_and_noeth_base_ring_implies_noeth = Implication.create({atoms:
-                                                             [module_is_fg,
-                                                              base_ring_is_lnoeth
-                                                             ],
-                                                           implies:
-                                                             module_has_acc})
+Implication.create do |i|
+  i.atoms = [module_is_fg, base_ring_is_lnoeth]
+  i.implies = module_has_acc
+end
+
 integers = Example.create do |e|
   e.structure = ring
   e.explanation_en = 'Integers'
