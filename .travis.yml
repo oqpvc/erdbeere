@@ -1,3 +1,6 @@
 language: ruby
 rvm: 2.4.0
-cache: bundler
+cache:
+  bundler: true
+  directories:
+    - $HOME/.rvm
