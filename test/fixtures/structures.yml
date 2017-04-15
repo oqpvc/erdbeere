@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-ring:
-  name: Ring
-  definition: A ring $R$ is an abelian group together with a map $R\times R …
-
-rmod:
-  name: $R$-(left-)Module
-

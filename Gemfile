@@ -5,7 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 gem 'bulma-rails', '~> 0.4.0'
 gem "font-awesome-rails"
 gem 'i18n-tasks', '~> 0.9.13'
@@ -13,6 +12,7 @@ gem 'globalize', git: 'https://github.com/globalize/globalize'
 gem 'globalize-accessors'
 gem 'activemodel-serializers-xml'
 gem 'rails-i18n'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use Puma as the app server
@@ -45,6 +45,9 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'sqlite3'
   gem 'rake'
+  gem 'factory_girl_rails'
+  gem 'faker', git: 'https://github.com/stympy/faker'
+  gem 'rspec-rails'
 end
 
 group :production do
