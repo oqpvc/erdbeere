@@ -20,7 +20,7 @@
                             <h5 class="title"><%= I18n.t("building_block_realizations.show.hardcoded_falsehoods", :default => "Hardcoded Falsehoods") %></h5>
                             <ul id="falsehoods">
                                 <% bbr.realization.falsehoods.each do |atom| %>
-                                    <%= render 'atoms/show', atom: atom, modifier: 'is not' %>
+                                    <%= render 'atoms/show', atom: atom, modifier: 'logic.is_not' %>
                                 <% end %>
                             </ul>
                         </div>

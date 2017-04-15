@@ -4,6 +4,9 @@ en:
     show:
       hardcoded_falsehoods: Hardcoded falsehoods
       hardcoded_truths: Hardcoded truths
+  example:
+    show:
+      title: 'Example:'
   examples:
     find:
       direct_hits: Direct hits
@@ -36,6 +39,10 @@ en:
       notice: Notice
       search: Search
       warning: Warning
+  logic:
+    is: is
+    is_and_is_not: is and is not
+    is_not: is not
   main:
     search:
       satisfies: Satisfies

@@ -4,6 +4,9 @@ de:
     show:
       hardcoded_falsehoods: Hinterlegte Verletzungen
       hardcoded_truths: Hinterlegte Wahrheiten
+  example:
+    show:
+      title: 'Beispiel:'
   examples:
     find:
       direct_hits: Direkte Treffer
@@ -36,6 +39,10 @@ de:
       notice: Nachricht
       search: Suche
       warning: Warnung
+  logic:
+    is: ist
+    is_and_is_not: ist und ist nicht
+    is_not: ist nicht
   main:
     search:
       satisfies: Erfüllt

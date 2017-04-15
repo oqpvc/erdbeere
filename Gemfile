@@ -10,6 +10,7 @@ gem 'bulma-rails', '~> 0.4.0'
 gem "font-awesome-rails"
 gem 'i18n-tasks', '~> 0.9.13'
 gem 'globalize', git: 'https://github.com/globalize/globalize'
+gem 'globalize-accessors'
 gem 'activemodel-serializers-xml'
 gem 'rails-i18n'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

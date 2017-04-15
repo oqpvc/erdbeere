@@ -1,4 +1,4 @@
-<% provide(:title, 'Example: ' + @example.explanation[0..50]) %>
+<% provide(:title, I18n.t('example.show.title') + ' ' + @example.explanation[0..50]) %>
 
 <div class="tile is-ancestor">
     <div class="tile is-vertical is-parent is-9">
@@ -14,7 +14,7 @@
             <ul>
                 <% @example.atoms_from_example_truths.each do |atom| %>
                     <% if atom.stuff_w_props == @example.structure %>
-                        <%= render 'atoms/show', :atom => atom, :modifier => 'is' %>
+                        <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is' %>
                     <% end %>
                 <% end %>
             </ul>
@@ -26,7 +26,7 @@
             <h3 class="title"><%= I18n.t("examples.show.hardcoded_falsehoods", :default => "Hardcoded Falsehoods") %></h3>
             <ul id="falsehoods">
                 <% @example.falsehoods.each do |atom| %>
-                    <%= render 'atoms/show', :atom => atom, :modifier => 'is not' %>
+                    <%= render 'atoms/show', :atom => atom, :modifier => 'logic.is_not' %>
                 <% end %>
             </ul>
             </div>
@@ -53,7 +53,7 @@
         <h3 class="title"><%= I18n.t("examples.show.derived_truths", :default => "Derived truths") %></h3>
         <ul>
             <% (@example.all_that_is_true - @example.atoms_from_example_truths).each do |atom| %>
-                <%= render 'atoms/show', atom: atom, modifier: 'is' %>
+                <%= render 'atoms/show', atom: atom, modifier: 'logic.is' %>
             <% end %>
         </ul>
         </div>

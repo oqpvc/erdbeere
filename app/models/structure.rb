@@ -7,6 +7,9 @@ class Structure < ApplicationRecord
   has_many :atoms, as: :stuff_w_props
   #has_many :building_blocks, inverse_of: :structure
 
+  translates :name, :definition, :fallbacks_for_empty_translations => true
+  globalize_accessors
+
   def structure
     self
   end

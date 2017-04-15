@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170402080057) do
+ActiveRecord::Schema.define(version: 20170415114245) do
 
   create_table "atoms", force: :cascade do |t|
     t.string   "stuff_w_props_type"
@@ -40,15 +40,34 @@ ActiveRecord::Schema.define(version: 20170402080057) do
     t.index ["realization_id"], name: "index_building_block_realizations_on_realization_id"
   end
 
-  create_table "building_blocks", force: :cascade do |t|
+  create_table "building_block_translations", force: :cascade do |t|
+    t.integer  "building_block_id", null: false
+    t.string   "locale",            null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "name"
     t.text     "definition"
+    t.index ["building_block_id"], name: "index_building_block_translations_on_building_block_id"
+    t.index ["locale"], name: "index_building_block_translations_on_locale"
+  end
+
+  create_table "building_blocks", force: :cascade do |t|
     t.integer  "explained_structure_id"
     t.integer  "structure_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["explained_structure_id"], name: "index_building_blocks_on_explained_structure_id"
     t.index ["structure_id"], name: "index_building_blocks_on_structure_id"
+  end
+
+  create_table "example_translations", force: :cascade do |t|
+    t.integer  "example_id",  null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "explanation"
+    t.index ["example_id"], name: "index_example_translations_on_example_id"
+    t.index ["locale"], name: "index_example_translations_on_locale"
   end
 
   create_table "example_truths", force: :cascade do |t|
@@ -62,7 +81,6 @@ ActiveRecord::Schema.define(version: 20170402080057) do
   end
 
   create_table "examples", force: :cascade do |t|
-    t.text     "explanation"
     t.integer  "structure_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -87,17 +105,35 @@ ActiveRecord::Schema.define(version: 20170402080057) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.string   "name"
-    t.text     "definition"
     t.integer  "structure_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["structure_id"], name: "index_properties_on_structure_id"
   end
 
-  create_table "structures", force: :cascade do |t|
+  create_table "property_translations", force: :cascade do |t|
+    t.integer  "property_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "name"
     t.text     "definition"
+    t.index ["locale"], name: "index_property_translations_on_locale"
+    t.index ["property_id"], name: "index_property_translations_on_property_id"
+  end
+
+  create_table "structure_translations", force: :cascade do |t|
+    t.integer  "structure_id", null: false
+    t.string   "locale",       null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "name"
+    t.text     "definition"
+    t.index ["locale"], name: "index_structure_translations_on_locale"
+    t.index ["structure_id"], name: "index_structure_translations_on_structure_id"
+  end
+
+  create_table "structures", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

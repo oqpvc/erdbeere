@@ -6,6 +6,9 @@ class Example < ApplicationRecord
 
   validates :structure, presence: true
 
+  translates :explanation, :fallbacks_for_empty_translations => true
+  globalize_accessors
+
   def satisfied
     example_truths.find_all { |t| t.satisfied == true }.map { |t| t.property }
   end

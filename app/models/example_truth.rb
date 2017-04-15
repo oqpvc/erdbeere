@@ -1,6 +1,6 @@
 class SaneExampleTruths < ActiveModel::Validator
   def validate(et)
-    if et.example.structure != property.structure
+    if et.example.structure != et.property.structure
       et.errors[:base] << "Mismatch between example and property in example_truth"
     end
   end
