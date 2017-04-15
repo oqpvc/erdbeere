@@ -86,6 +86,7 @@ end
 
 ExampleTruth.create({example: integers, property: comm, satisfied: true})
 ExampleTruth.create({example: integers, property: l_noeth, satisfied: true})
+ExampleTruth.create({example: integers, property: unitary, satisfied: true})
 ExampleTruth.create({example: integers, property: vnr, satisfied: false})
 
 zee_r = Example.create do |e|
