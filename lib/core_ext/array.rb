@@ -14,9 +14,11 @@ def until_stable(function, seed, iterations = -1)
 end
 
 class Array
+  def of_atoms?
+    self.find_all { |m| not m.kind_of?(Atom) }.empty?
+  end
   def all_that_follows
-    raise 'Not all members of Array are Atoms' unless self.find_all { |m| not
-      m.kind_of?(Atom) }.empty?
+    raise 'Not all members of Array are Atoms' unless of_atoms?
 
     until_stable(:follows_in_one_iteration, self)
   end
@@ -43,5 +45,10 @@ class Array
     # .uniq is actually necessary, as multiple implications might have the same
     # consequence
     return [(self + new_atoms).uniq, interesting_implications]
+  end
+
+  def implies!(atom)
+    raise 'Not all members of Array are Atoms' unless of_atoms?
+    Implication.create({atoms: self, implies: atom})
   end
 end
