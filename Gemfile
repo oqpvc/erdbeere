@@ -48,6 +48,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker', git: 'https://github.com/stympy/faker'
   gem 'rspec-rails'
+  gem 'capybara'
 end
 
 group :production do

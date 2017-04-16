@@ -19,12 +19,10 @@ class ExamplesController < ApplicationController
       render 'violates_logic'
     end
 
-    p params[:structure_id]
-
     @almost_hits = Example.where('structure_id = ?', params[:structure_id].to_i).all.to_a.find_all do |e|
       (@satisfies - e.all_that_is_satisfied).empty? && (@violates & e.all_that_is_satisfied).empty?
     end
-    
+
     if @almost_hits.empty? then
       flash.now[:warning] = I18n.t('examples.find.flash.nothing_found')
     else
@@ -32,6 +30,5 @@ class ExamplesController < ApplicationController
         (@violates - e.all_that_is_violated).empty?
       end
     end
-    p flash
   end
 end
