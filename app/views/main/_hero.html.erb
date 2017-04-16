@@ -1,0 +1,12 @@
+<section class="hero <%= class_modifier %>"  data-temporary="true">
+  <div class="hero-body">
+    <div class="container">
+      <% unless subtitle.blank? %>
+        <h3 class="subtitle"><%= subtitle %></h2>
+      <% end %>
+      <% unless title.blank? %>
+        <h2 class="title"><%= title %></h2>
+      <% end %>
+    </div>
+  </div>
+</section>
