@@ -26,5 +26,9 @@ class Atom < ApplicationRecord
   def implies!(atom)
     [self].implies!(atom)
   end
+
+  def is_equivalent!(atoms)
+    [self].is_equivalent! atoms
+  end
 end
 

@@ -49,6 +49,23 @@ class Array
 
   def implies!(atom)
     raise 'Not all members of Array are Atoms' unless of_atoms?
-    Implication.create({atoms: self, implies: atom})
+    if atom.kind_of?(Array) then
+      atom.each do |a|
+        self.implies! a
+      end
+    elsif atom.kind_of?(Atom) then
+      Implication.create({atoms: self, implies: atom})
+    else
+      raise 'Argument not of type Atom'
+    end
+  end
+
+  def is_equivalent!(atoms)
+    atoms.each do |a|
+      Implication.create({atoms: self, implies: a})
+    end
+    self.each do |a|
+      Implication.create({atoms: atoms, implies: a})
+    end
   end
 end
