@@ -113,11 +113,13 @@ hence very slow, which still might be fast enough for practical purposes.
 Working with it roughly looks like this:
 
 ```ruby
+[comm, l_noeth].is_equivalent! [comm, r_noeth]
+
 zee_r.satisfies?(module_has_acc)
 zee_r.satisfies?(Atom.find_or_create_by({stuff_w_props:
-                                                   building_blocks(:base_ring),
+                                                   base_ring,
                                                    property:
-                                                   properties(:r_noeth)}))
+                                                   r_noeth}))
 zee_r.all_that_is_true.each do |a|
   puts a.to_s
 end
