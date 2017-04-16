@@ -1,12 +1,4 @@
 # coding: utf-8
-class SaneAtoms < ActiveModel::Validator
-  def validate(atom)
-    if atom.property.structure != atom.stuff_w_props.structure
-      atom.errors[:base] << "Mismatch between property and structure"
-    end
-  end
-end
-
 class Atom < ApplicationRecord
   has_and_belongs_to_many :implications
 
@@ -15,7 +7,7 @@ class Atom < ApplicationRecord
 
   validates :stuff_w_props, presence: true
   validates :property, presence: true
-  validates_with SaneAtoms
+  validates_with EqualityTest, a: 'property.structure', b: 'stuff_w_props.structure'
   validates :property, :uniqueness => { :scope => :stuff_w_props }
 
   def to_s
@@ -29,6 +21,10 @@ class Atom < ApplicationRecord
     end
 
     atoms.all_that_follows.include?(self)
+  end
+
+  def implies!(atom)
+    [self].implies!(atom)
   end
 end
 

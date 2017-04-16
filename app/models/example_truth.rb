@@ -1,18 +1,10 @@
-class SaneExampleTruths < ActiveModel::Validator
-  def validate(et)
-    if et.example.structure != et.property.structure
-      et.errors[:base] << "Mismatch between example and property in example_truth"
-    end
-  end
-end
-
 class ExampleTruth < ApplicationRecord
   belongs_to :example
   belongs_to :property
 
   validates :example, presence: true
   validates :property, presence: true
-  validates_with SaneExampleTruths
+  validates_with EqualityTest, a: 'example.structure', b: 'property.structure'
 
   def violated?
     if satisfied.nil?
