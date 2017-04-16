@@ -33,7 +33,7 @@ FactoryGirl.define do
   end
 
   factory :example do
-    explanation { Faker::Hipster.paragraph }
+    description { Faker::Hipster.paragraph }
     structure
   end
 end

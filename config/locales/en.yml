@@ -10,7 +10,7 @@ en:
   examples:
     find:
       direct_hits: Direct hits
-      explanation: Explanation
+      description: Description
       flash:
         no_search_params: You didn't look for anything!
         nothing_found: I don't know of any such object ☹
@@ -22,7 +22,7 @@ en:
     show:
       building_blocks: Building blocks
       derived_truths: Derived truths
-      explanation: Explanation
+      description: Description
       hardcoded_falsehoods: Hardcoded falsehoods
       hardcoded_truths: Hardcoded truths
     violates_logic:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415114245) do
+ActiveRecord::Schema.define(version: 20170416151529) do
 
   create_table "atoms", force: :cascade do |t|
     t.string   "stuff_w_props_type"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170415114245) do
     t.string   "locale",      null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.text     "explanation"
+    t.text     "description"
     t.index ["example_id"], name: "index_example_translations_on_example_id"
     t.index ["locale"], name: "index_example_translations_on_locale"
   end

@@ -10,7 +10,7 @@ de:
   examples:
     find:
       direct_hits: Direkte Treffer
-      explanation: Erklärung
+      description: Beschreibung
       flash:
         no_search_params: Du hast nach nichts gesucht!
         nothing_found: Ein solches Objekt kenne ich nicht ☹
@@ -22,7 +22,7 @@ de:
     show:
       building_blocks: Bausteine
       derived_truths: Abgeleitete Wahrheiten
-      explanation: Erklärung
+      description: Beschreibung
       hardcoded_falsehoods: Hinterlegte Verletzungen
       hardcoded_truths: Hinterlegte Wahrheiten
     violates_logic:

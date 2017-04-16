@@ -1,10 +1,10 @@
-<% provide(:title, I18n.t('example.show.title') + ' ' + @example.explanation[0..50]) %>
+<% provide(:title, I18n.t('example.show.title') + ' ' + @example.description[0..50]) %>
 <div class="tile is-ancestor">
   <div class="tile is-vertical is-parent is-9">
     <article class="tile is-child notification is-info">
       <div class="content">
-        <h3 class="title"><%= I18n.t("examples.show.explanation", :default => "Explanation") %></h3>
-        <p><%= @example.explanation %></p>
+        <h3 class="title"><%= I18n.t("examples.show.description", :default => "Description") %></h3>
+        <p><%= @example.description %></p>
       </div>
     </article>
     <article class="tile is-child notification is-success">
