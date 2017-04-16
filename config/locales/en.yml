@@ -9,8 +9,8 @@ en:
       title: 'Example:'
   examples:
     find:
-      direct_hits: Direct hits
       description: Description
+      direct_hits: Direct hits
       flash:
         no_search_params: You didn't look for anything!
         nothing_found: I don't know of any such object ☹
@@ -33,6 +33,8 @@ en:
         for an object with the following falsehoods
       you_were_looking_for_an_object_with_the_following_truths: You were looking for
         an object with the following truths
+  footer:
+    is_on: is on
   layouts:
     application:
       error: Error

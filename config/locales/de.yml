@@ -9,8 +9,8 @@ de:
       title: 'Beispiel:'
   examples:
     find:
-      direct_hits: Direkte Treffer
       description: Beschreibung
+      direct_hits: Direkte Treffer
       flash:
         no_search_params: Du hast nach nichts gesucht!
         nothing_found: Ein solches Objekt kenne ich nicht ☹
@@ -33,6 +33,8 @@ de:
         Objekt gesucht, welches folgendes verletzt
       you_were_looking_for_an_object_with_the_following_truths: Du hast nach einem
         Objekt gesucht, welches folgendes erfüllt
+  footer:
+    is_on: ist auf
   layouts:
     application:
       error: Fehler

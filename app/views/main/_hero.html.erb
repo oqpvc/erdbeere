@@ -1,10 +1,10 @@
-<section class="hero <%= class_modifier %>"  data-temporary="true">
+<section class="hero <%= local_assigns[:class_modifier].nil? ? '' : class_modifier %>"  data-temporary="true">
   <div class="hero-body">
     <div class="container">
-      <% unless subtitle.blank? %>
+      <% unless local_assigns[:subtitle].nil? %>
         <h3 class="subtitle"><%= subtitle %></h2>
       <% end %>
-      <% unless title.blank? %>
+      <% unless local_assigns[:title].nil? %>
         <h2 class="title"><%= title %></h2>
       <% end %>
     </div>
