@@ -7,30 +7,55 @@ ring = Structure.create do |r|
                     'map $R\times R …'
 end
 
-unitary = Property.create({name_en: 'unitary', structure: ring})
-
-l_noeth = Property.create do |p|
-  p.name_en = 'left Noetherian'
-  p.name_de = 'linksnoethersch'
-  p.structure = ring
+rp = {}
+[
+  ['unitary', 'mit Eins'],
+  ['left Noetherian', 'linksnoethersch'],
+  ['right Noetherian', 'rechtsnoethersch'],
+  ['commutative', 'kommutativ'],
+  ['absolutely flat', 'von Neumann regulär']
+].map do |i|
+  rp[i.first] = Property.create do |p|
+    p.name_en = i.first
+    p.name_de = i.second
+    p.structure = ring
+  end.to_atom
 end
 
-r_noeth = Property.create do |p|
-  p.name_en = 'right Noetherian'
-  p.name_de = 'rechtsnoethersch'
-  p.structure = ring
+[rp['commutative'], rp['left Noetherian']].is_equivalent! [rp['commutative'], rp['right Noetherian']]
+
+zee = Example.create do |e|
+  e.structure = ring
+  e.description_en = 'Integers'
+  e.description_de = '$\mathbb Z$'
 end
 
-comm = Property.create do |p|
-  p.name_en = 'commutative'
-  p.structure = ring
+zee.satisfies! [rp['commutative'], rp['unitary'], rp['left Noetherian']]
+zee.violates! rp['absolutely flat']
+
+right_not_left_noeth = Example.create do |e|
+  e.structure = ring
+  e.description = '$\begin{pmatrix}\mathbb Z& \mathbb Q \\\\ 0 & \mathbb Q\end{pmatrix}$'
 end
 
-vnr = Property.create do |p|
-  p.name_en = 'von Neumann regular (aka absolutely flat)'
-  p.name_de = 'von Neumann regulär'
-  p.structure = ring
+right_not_left_noeth.violates! [rp['commutative'], rp['left Noetherian']]
+right_not_left_noeth.satisfies! [rp['right Noetherian'], rp['unitary']]
+
+not_comm_not_unit = Example.create do |e|
+  e.structure = ring
+  e.description = '$\mathrm{M}_{2\times 2}(2\mathbb Z)$'
 end
+
+not_comm_not_unit.violates! [rp['commutative'], rp['unitary'], rp['absolutely flat']]
+not_comm_not_unit.satisfies! [rp['left Noetherian'], rp['right Noetherian']]
+
+comm_not_noeth = Example.create do |e|
+  e.structure = ring
+  e.description = '$\mathbb Z[X_1, X_2, \dots]$'
+end
+
+comm_not_noeth.satisfies! [rp['commutative'], rp['unitary']]
+comm_not_noeth.violates! [rp['left Noetherian'], rp['absolutely flat']]
 
 rmod = Structure.create do |s|
   s.name_en = '$R$-(left-)Module'
@@ -41,46 +66,27 @@ base_ring = BuildingBlock.create do |b|
   b.name_en = 'base ring'
   b.explained_structure = rmod
   b.structure = ring
-
   b.definition_en = 'A ring homomorphism $R\longrightarrow ' +
                      '\mathrm{End}(M)$ …'
-
 end
 
-Implication.create do |i|
-  i.atoms = [comm.to_atom, l_noeth.to_atom]
-  i.implies = r_noeth.to_atom
+mp = {}
+[
+  ['finitely generated', 'endlich erzeugt'],
+  ['ACC for submodules', 'noethersch']
+].map do |i|
+  mp[i.first] = Property.create do |p|
+    p.name_en = i.first
+    p.name_de = i.second
+    p.structure = rmod
+  end.to_atom
 end
-
-Implication.create do |i|
-  i.atoms = [comm.to_atom, r_noeth.to_atom]
-  i.implies = l_noeth.to_atom
-end
-
-fin_gen = Property.create({name_en: 'finitely generated', structure: rmod})
-noeth_module = Property.create({name_en: 'ascending chain condition for ' +
-                               'submodules', structure: rmod})
 
 base_ring_is_lnoeth = Atom.create({stuff_w_props: base_ring, property:
-                                   l_noeth})
-module_is_fg = Atom.create({stuff_w_props: rmod, property: fin_gen})
-module_has_acc = Atom.create({stuff_w_props: rmod, property: noeth_module})
+                                                               rp['left Noetherian'].property})
 
-Implication.create do |i|
-  i.atoms = [module_is_fg, base_ring_is_lnoeth]
-  i.implies = module_has_acc
-end
+[base_ring_is_lnoeth, mp['finitely generated']].implies! mp['ACC for submodules']
 
-integers = Example.create do |e|
-  e.structure = ring
-  e.description_en = 'Integers'
-  e.description_de = '$\mathbb Z$'
-end
-
-ExampleTruth.create({example: integers, property: comm, satisfied: true})
-ExampleTruth.create({example: integers, property: l_noeth, satisfied: true})
-ExampleTruth.create({example: integers, property: unitary, satisfied: true})
-ExampleTruth.create({example: integers, property: vnr, satisfied: false})
 
 zee_r = Example.create do |e|
   e.structure = rmod
@@ -89,5 +95,16 @@ zee_r = Example.create do |e|
 end
 
 BuildingBlockRealization.create({example: zee_r, building_block:
-  base_ring, realization: integers})
-ExampleTruth.create({example: zee_r, property: fin_gen, satisfied: true})
+  base_ring, realization: zee})
+
+zee_r.satisfies! mp['finitely generated']
+
+fg_not_noeth_mod = Example.create do |e|
+  e.structure = rmod
+  e.description_en = '$\mathbb Z[X_1, X_2, \dots]$ as a module over itself'
+  e.description_de = '$\mathbb Z[X_1, X_2, \dots]$ als Module über sich selbst'
+end
+
+BuildingBlockRealization.create({example: fg_not_noeth_mod, building_block: base_ring, realization: comm_not_noeth})
+fg_not_noeth_mod.satisfies! mp['finitely generated']
+fg_not_noeth_mod.violates! mp['ACC for submodules']

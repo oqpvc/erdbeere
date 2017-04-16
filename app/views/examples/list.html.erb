@@ -8,7 +8,7 @@
             <h2 class="title"><%= s.name %></h2>
             <ul>
               <% s.examples.each do |e| %>
-                <li><%= link_to e.description[0..50], examples_show_path(:id => e.id) %></li>
+                <li><%= link_to e.description[0..100], examples_show_path(:id => e.id) %></li>
               <% end %>
             </ul>
           </article>

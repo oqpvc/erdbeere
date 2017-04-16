@@ -62,4 +62,34 @@ class Example < ApplicationRecord
 
     all_that_is_true.include?(atom)
   end
+
+  def violates?(atom)
+    # atom might be a property
+    atom = atom.kind_of?(Property) ? atom.to_atom : atom
+
+    all_that_is_violated.include?(atom)
+  end
+
+  def satisfies!(atom)
+    set_truth(atom, true)
+  end
+
+  def violates!(atom)
+    set_truth(atom, false)
+  end
+
+  def set_truth(atom, value)
+    if atom.kind_of?(Array)
+      atom.each do |a|
+        self.set_truth(a, value)
+      end
+    elsif atom.kind_of?(Property)
+      self.set_truth(atom.to_atom, value)
+    else
+      methods = {true => 'satisfies?', false => 'violates?'}
+      raise 'not implemented' unless atom.stuff_w_props == self.structure
+      raise "already set to #{not value}" if self.send(methods[(not value)], atom)
+      ExampleTruth.find_or_create_by({example: self, property: atom.property, satisfied: value})
+    end
+  end
 end

@@ -86,10 +86,7 @@ base_ring_is_lnoeth = Atom.create({stuff_w_props: base_ring, property:
 module_is_fg = Atom.create({stuff_w_props: rmod, property: fin_gen})
 module_has_acc = Atom.create({stuff_w_props: rmod, property: noeth_module})
 
-fg_and_noeth_base_ring_implies_noeth =Implication.create({atoms:
-                                                           [module_is_fg, base_ring_is_lnoeth],
-                                                           implies:
-                                                           module_has_acc})
+[module_is_fg, base_ring_is_lnoeth].implies! module_has_acc
 ```
 
 ### Examples
@@ -99,15 +96,14 @@ all of its building blocks (e. g., for an $R$-module we first need a
 ring $R$). Consider the following code snippet:
 
 ```ruby
-integers = Example.create({structure: ring})
-ExampleTruth.create({example: integers, property: comm, satisfied: true})
-ExampleTruth.create({example: integers, property: l_noeth, satisfied: true})
-ExampleTruth.create({example: integers, property: vnr, satisfied: false})
+zee = Example.create({structure: ring})
+zee.satisfies! [comm, l_noeth, vnr]
+zee.violates! vnr
 
 zee_r = Example.create({structure: rmod})
 BuildingBlockRealization.create({example: zee_r, building_block:
-  base_ring, realization: integers})
-ExampleTruth.create({example: zee_r, property: fin_gen, satisfied: true})
+  base_ring, realization: zee})
+zee_r.satisfies! module_is_fg
 ```
 
 ### Using the logic engine
@@ -131,8 +127,3 @@ As one can see, the implications on the level of examples work recursively: Even
 though we never had an ExampleTruth that stated that for commutative *base
 rings* (and not *rings*) left and right Noetherian are equivalent, the logic
 engine derives those kind of statements from the bottom up.
-
-In contrast to that, we cannot encode implications from the top down (such as:
-the existence of a separated morphism X→ Y with Y separated as a scheme implies
-that X is itself separated, where we view X and Y as the building blocks
-*domain* and *codomain* of the structure *scheme morphism*).
