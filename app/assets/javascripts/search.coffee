@@ -1,5 +1,5 @@
 $(document).on 'turbolinks:load', ->
-  $("form").hide()
+  $("article.search-form").hide()
 
   $(".menu-list a").click (e) ->
     e.preventDefault()
@@ -11,8 +11,8 @@ $(document).on 'turbolinks:load', ->
 
     # which form do we want to show?
     toShow = $(this).attr('data')
-    $("form").each ->
-      f = $(@)
-      f.slideUp('slow') unless f.attr('id') is toShow
+    $("article.search-form").each ->
+      art = $(@)
+      art.slideUp('slow') unless art.attr('id') is toShow
     $("#"+toShow).slideDown('slow')
 

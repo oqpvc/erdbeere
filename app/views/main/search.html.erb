@@ -7,13 +7,6 @@
         <% Structure.find_each do |s| %>
           <li>
             <%= link_to s.name, '', data: 'structure-form-' + s.id.to_s %>
-            <!--                <% unless s.building_blocks.empty? %>
-                    <ul>
-                        <% s.building_blocks.each do |bb| %>
-                            <%= render 'building_blocks/search_menu', :bb => bb %>
-                        <% end %>
-                    </ul>
-                <% end %>-->
           </li>
         <% end %>
       </ul>
@@ -21,11 +14,11 @@
   </div>
   <div class="column">
     <% Structure.find_each do |s| %>
-      <%= form_tag(examples_find_path, method: 'post', id: 'structure-form-'+s.id.to_s) do %>
-        <%= hidden_field_tag 'structure_id', s.id %>
-        <div class="content box">
+      <article class="article box search-form" id="structure-form-<%= s.id %>">
+        <%= form_tag(examples_find_path, method: 'post') do %>
+          <%= hidden_field_tag 'structure_id', s.id %>
           <h2 class="title"><%= s.name %></h2>
-          <div class="tile is-ancestor is-vertical">
+          <div class="tile is-ancestor">
             <div class="tile is-parent">
               <div class="tile is-child notification is-success">
                 <%= label_tag(:satisfies, I18n.t("main.search.satisfies", :default => 'Satisfies:'), class: 'label') %>
@@ -36,39 +29,21 @@
                 <%= select_tag(:violates, options_for_select(s.properties.map { |p| [p.name, p.to_atom.id] }), multiple: true, class: 'multi-select') %>
               </div>
             </div>
-            <% unless s.building_blocks.empty? %>
-              <div class="tile is-parent">
-                <div class="tile is-child">
-                  <div class="tile is-ancestor">
-                    <div class="tile is-parent">
-                      <% s.building_blocks.each do |bb| %>
-                        <div class="tile is-child">
-                          <div class="content box">
-                            <h3 class="title"><%= bb.name %></h3>
-                            <div class="tile is-ancestor">
-                              <div class="tile is-parent is-vertical">
-                                <div class="tile is-child notification is-success">
-                                  <%= label_tag(:satisfies, I18n.t("main.search.satisfies", :default => 'Satisfies:'), class: 'label') %>
-                                  <%= select_tag(:satisfies, options_for_select(bb.structure.properties.map { |p| [p.name, p.to_atom(bb).id] }), multiple: true, class: 'multi-select') %>
-                                </div>
-                                <div class="tile is-child notification is-danger">
-                                  <%= label_tag(:violates, I18n.t("main.search.violates", :default => 'Violates:'), class: 'label') %>
-                                  <%= select_tag(:violates, options_for_select(bb.structure.properties.map { |p| [p.name, p.to_atom(bb).id] }), multiple: true, class: 'multi-select') %>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <% end %>
           </div>
+          <% unless s.building_blocks.empty? %>
+            <div class="tile is-ancestor is-vertical">
+              <% s.building_blocks.each_slice(2) do |slice| %>
+                <div class="tile is-parent">
+                  <% slice.each do |bb| %>
+                    <%= render("building_blocks/search_properties_row", bb: bb)%>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
           <%= submit_tag(I18n.t('main.search.search_button'), class: 'button') %>
-        </div>
-      <% end %>
+        <% end %>
+      </article>
     <% end %>
   </div>
 </div>

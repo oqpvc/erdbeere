@@ -3,14 +3,7 @@
   <h2 class="title"><%= I18n.t("examples.find.direct_hits", :default => "Direct hits") %></h2>
   <div class="tile is-ancestor is-vertical">
     <% @hits.each_slice(3).each do |slice| %>
-      <div class="tile is-parent">
-        <% slice.each do |hit| %>
-          <div class="tile content is-child">
-            <h3 class="subtitle"><%= I18n.t("examples.find.description", :default => 'Description') %></h3>
-            <p class="title"><%= link_to hit.description, examples_show_path(id: hit.id) %></p>
-          </div>
-        <% end %>
-      </div>
+      <%= render('row_of_search_results', slice: slice) %>
     <% end %>
   </div>
 <% end %>
@@ -18,14 +11,7 @@
   <h2 class="title"><%= I18n.t("examples.find.still_consistent", :default => "Still consistent") %></h2>
   <div class="tile is-ancestor">
     <% (@almost_hits - @hits).each_slice(3).each do |slice| %>
-      <div class="tile is-parent">
-        <% slice.each do |hit| %>
-          <div class="tile content is-child">
-            <h3 class="title"><%= I18n.t("examples.find.description", :default => "Description") %></h3>
-            <%= content_tag(:p, hit.description) %>
-          </div>
-        <% end %>
-      </div>
+      <%= render('row_of_search_results', slice: slice) %>
     <% end %>
   </div>
 <% end %>

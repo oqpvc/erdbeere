@@ -1,0 +1,17 @@
+<div class="tile is-child">
+  <div class="content box">
+    <h3 class="title"><%= bb.name %></h3>
+    <div class="tile is-ancestor">
+      <div class="tile is-parent is-vertical">
+        <div class="tile is-child notification is-success">
+          <%= label_tag(:satisfies, I18n.t("main.search.satisfies", :default => 'Satisfies:'), class: 'label') %>
+          <%= select_tag(:satisfies, options_for_select(bb.structure.properties.map { |p| [p.name, p.to_atom(bb).id] }), multiple: true, class: 'multi-select') %>
+        </div>
+        <div class="tile is-child notification is-danger">
+          <%= label_tag(:violates, I18n.t("main.search.violates", :default => 'Violates:'), class: 'label') %>
+          <%= select_tag(:violates, options_for_select(bb.structure.properties.map { |p| [p.name, p.to_atom(bb).id] }), multiple: true, class: 'multi-select') %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
