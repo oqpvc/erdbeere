@@ -30,6 +30,7 @@ select[multiple].multi-select {
     display: block;
     outline: none;
     padding-right: 2.5em;
+    height: 13em;
 }
 
 select[multiple].multi-select:active, select[multiple].multi-select:focus {
