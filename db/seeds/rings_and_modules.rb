@@ -73,8 +73,8 @@ end
 
 integers = Example.create do |e|
   e.structure = ring
-  e.explanation_en = 'Integers'
-  e.explanation_de = '$\mathbb Z$'
+  e.description_en = 'Integers'
+  e.description_de = '$\mathbb Z$'
 end
 
 ExampleTruth.create({example: integers, property: comm, satisfied: true})
@@ -84,8 +84,8 @@ ExampleTruth.create({example: integers, property: vnr, satisfied: false})
 
 zee_r = Example.create do |e|
   e.structure = rmod
-  e.explanation_de = '$\mathbb Z^r$ als Modul über $\mathbb Z$'
-  e.explanation_en = '$\mathbb Z^r$ as a module over the integers'
+  e.description_de = '$\mathbb Z^r$ als Modul über $\mathbb Z$'
+  e.description_en = '$\mathbb Z^r$ as a module over the integers'
 end
 
 BuildingBlockRealization.create({example: zee_r, building_block:
