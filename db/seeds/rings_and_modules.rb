@@ -56,13 +56,13 @@ end
 pid_but_not_euclidean.satisfies! rp['PID']
 pid_but_not_euclidean.violates! [rp['Euclidean domain'], rp['absolutely flat']]
 
-ufd_but_not_pid = Example.create do |e|
+ufd_but_not_dedekind = Example.create do |e|
   e.structure = ring
   e.description = '$\mathbb Z[X]$'
 end
 
-ufd_but_not_pid.satisfies! rp['UFD']
-ufd_but_not_pid.violates! [rp['PID'], rp['absolutely flat']]
+ufd_but_not_dedekind.satisfies! rp['UFD']
+ufd_but_not_dedekind.violates! [rp['Dedekind'], rp['absolutely flat']]
 
 dedekind_but_not_ufd = Example.create do |e|
   e.structure = ring
