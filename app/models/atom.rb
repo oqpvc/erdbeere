@@ -1,6 +1,7 @@
 # coding: utf-8
 class Atom < ApplicationRecord
-  has_and_belongs_to_many :implications
+  has_many :premises
+  has_many :implications, through: :premises
 
   belongs_to :stuff_w_props, polymorphic: true
   belongs_to :property

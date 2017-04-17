@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170416151529) do
+ActiveRecord::Schema.define(version: 20170417115021) do
 
   create_table "atoms", force: :cascade do |t|
     t.string   "stuff_w_props_type"
@@ -20,13 +20,6 @@ ActiveRecord::Schema.define(version: 20170416151529) do
     t.datetime "updated_at",         null: false
     t.index ["property_id"], name: "index_atoms_on_property_id"
     t.index ["stuff_w_props_type", "stuff_w_props_id"], name: "index_atoms_on_stuff_w_props_type_and_stuff_w_props_id"
-  end
-
-  create_table "atoms_implications", id: false, force: :cascade do |t|
-    t.integer "atom_id"
-    t.integer "implication_id"
-    t.index ["atom_id"], name: "index_atoms_implications_on_atom_id"
-    t.index ["implication_id"], name: "index_atoms_implications_on_implication_id"
   end
 
   create_table "building_block_realizations", force: :cascade do |t|
@@ -102,6 +95,13 @@ ActiveRecord::Schema.define(version: 20170416151529) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["implies_id"], name: "index_implications_on_implies_id"
+  end
+
+  create_table "premises", force: :cascade do |t|
+    t.integer "atom_id"
+    t.integer "implication_id"
+    t.index ["atom_id"], name: "index_premises_on_atom_id"
+    t.index ["implication_id"], name: "index_premises_on_implication_id"
   end
 
   create_table "properties", force: :cascade do |t|
