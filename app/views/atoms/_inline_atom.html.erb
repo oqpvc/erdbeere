@@ -1,0 +1,5 @@
+<% modifier = t('logic.is') if local_assigns[:modifier].nil? %>
+<% delim_open = '' if local_assigns[:delim_open].nil? %>
+<% fullstop = '.' if local_assigns[:delim_close].nil? %>
+<% delim_close = '' if local_assigns[:delim_close].nil? %>
+<%= delim_open %><%= atom.stuff_w_props.name %> <strong><%= modifier %></strong> <%= atom.property.name %><%= fullstop %><%= delim_close %>

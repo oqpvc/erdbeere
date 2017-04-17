@@ -1,0 +1,12 @@
+<article class="message is-success derivation" id="usage-of-implication-<%= implication.id %>">
+  <p class="message-body">
+    <%= content_tag(:strong, t('implications.if')) %>
+    <% (implication.atoms - [implication.atoms.last]).each do |a| %>
+      <%= render("atoms/inline_atom", atom: a, delim_open: '(', delim_close: ')', fullstop:'') %>
+      <%= content_tag(:strong, t('implications.and')) %>
+    <% end %>
+    <%= render("atoms/inline_atom", atom: implication.atoms.last, delim_open: '(', delim_close: ')', fullstop: '') %>
+    <%= content_tag(:strong, t('implications.then')) %>
+    <%= render("atoms/inline_atom", atom: implication.implies) %>
+  </p>
+</article>

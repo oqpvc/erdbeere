@@ -35,6 +35,10 @@ de:
         Objekt gesucht, welches folgendes erfüllt
   footer:
     is_on: ist auf
+  implications:
+    and: und
+    if: Wenn
+    then: "dann:"
   layouts:
     application:
       error: Fehler

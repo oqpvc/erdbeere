@@ -13,7 +13,8 @@ class ExamplesController < ApplicationController
       redirect_to main_search_path
     end
 
-    @all_that_is_satisfied = @satisfies.all_that_follows.to_a
+    @all_that_is_satisfied_with_implications = @satisfies.all_that_follows_with_implications
+    @all_that_is_satisfied = @all_that_is_satisfied_with_implications.first
     unless (@all_that_is_satisfied & @violates).empty?
       flash.now[:error] = I18n.t('examples.find.flash.violates_logic')
       render 'violates_logic'

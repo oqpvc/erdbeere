@@ -23,6 +23,10 @@ class Array
     until_stable(:follows_in_one_iteration, self)
   end
 
+  def all_that_follows_with_implications
+    until_stable(:follows_in_one_iteration_with_implications, self)
+  end
+
   def follows_in_one_iteration
     # TODO this is probably the slowest implementation possible. is there a more
     # efficient way that still looks like rails?
@@ -36,15 +40,26 @@ class Array
   end
 
   def follows_in_one_iteration_with_implications
-    interesting_implications = Implication.all.to_a.find_all do |i|
-      (i.atoms - self).empty? && (not self.include?(i.implies))
+    imps_w_atoms = {}
+    atoms = []
+    if (not self.second.nil?) && self.second.kind_of?(Hash)
+      imps_w_atoms = self.second
+      atoms = self.first
+    else
+      atoms = self
     end
 
-    new_atoms = interesting_implications.map { |i| i.implies }
+    interesting_implications = Implication.all.to_a.find_all do |i|
+      (i.atoms - atoms).empty? && (not atoms.include?(i.implies))
+    end
+
+    interesting_implications.each do |i|
+      imps_w_atoms[i] = i.implies
+    end
 
     # .uniq is actually necessary, as multiple implications might have the same
     # consequence
-    return [(self + new_atoms).uniq, interesting_implications]
+    return [(atoms + imps_w_atoms.values).uniq, imps_w_atoms]
   end
 
   def implies!(atom)
@@ -62,10 +77,10 @@ class Array
 
   def is_equivalent!(atoms)
     atoms.each do |a|
-      Implication.create({atoms: self, implies: a})
+      Implication.find_or_create_by({atoms: self, implies: a})
     end
     self.each do |a|
-      Implication.create({atoms: atoms, implies: a})
+      Implication.find_or_create_by({atoms: atoms, implies: a})
     end
   end
 end

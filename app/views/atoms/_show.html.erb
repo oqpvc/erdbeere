@@ -1,2 +1,10 @@
-<% modifier = 'logic.is' if local_assigns[:modifier].nil? %>
-<li><%= atom.stuff_w_props.name %> <strong><%= I18n.t(modifier) %></strong> <%= atom.property.name %></li>
+<% modifier = t('logic.is') if local_assigns[:modifier].nil? %>
+<li>
+  <%= render("atoms/inline_atom", atom: atom, modifier: modifier) %>
+  <% unless local_assigns[:implication].nil? %>
+    <span class="icon is-small">
+      <i class="fa fa-plus-square toggle-derivation"  id="implication-<%= implication.id %>"></i>
+    </span>
+    <%= render("implications/inline_message", implication: implication) %>
+  <% end %>
+</li>

@@ -35,6 +35,10 @@ en:
         an object with the following truths
   footer:
     is_on: is on
+  implications:
+    and: and
+    if: If
+    then: then
   layouts:
     application:
       error: Error

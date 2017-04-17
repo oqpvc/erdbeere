@@ -25,6 +25,10 @@ class Example < ApplicationRecord
     all_that_is_true
   end
 
+  def all_that_is_satisfied_with_implications
+    self.truths.all_that_follows_with_implications
+  end
+
   def all_that_is_true
     truths(:all_that_follows)
   end
@@ -36,6 +40,7 @@ class Example < ApplicationRecord
   def falsehoods
     example_truths.where(satisfied: false).map { |f| f.property.to_atom }
   end
+
   def truths(fn = :itself, test = true)
     a = []
     if not building_block_realizations.blank?
