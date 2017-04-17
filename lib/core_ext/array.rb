@@ -77,10 +77,10 @@ class Array
 
   def is_equivalent!(atoms)
     atoms.each do |a|
-      Implication.find_or_create_by({atoms: self, implies: a})
+      Implication.create({atoms: self, implies: a})
     end
     self.each do |a|
-      Implication.find_or_create_by({atoms: atoms, implies: a})
+      Implication.create({atoms: atoms, implies: a})
     end
   end
 end
