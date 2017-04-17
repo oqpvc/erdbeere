@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417115021) do
+ActiveRecord::Schema.define(version: 20170417213115) do
 
   create_table "atoms", force: :cascade do |t|
     t.string   "stuff_w_props_type"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 20170417115021) do
     t.index ["structure_id"], name: "index_building_blocks_on_structure_id"
   end
 
+  create_table "example_facts", force: :cascade do |t|
+    t.integer  "example_id"
+    t.integer  "property_id"
+    t.boolean  "satisfied"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["example_id"], name: "index_example_facts_on_example_id"
+    t.index ["property_id"], name: "index_example_facts_on_property_id"
+  end
+
   create_table "example_translations", force: :cascade do |t|
     t.integer  "example_id",  null: false
     t.string   "locale",      null: false
@@ -61,16 +71,6 @@ ActiveRecord::Schema.define(version: 20170417115021) do
     t.text     "description"
     t.index ["example_id"], name: "index_example_translations_on_example_id"
     t.index ["locale"], name: "index_example_translations_on_locale"
-  end
-
-  create_table "example_truths", force: :cascade do |t|
-    t.integer  "example_id"
-    t.integer  "property_id"
-    t.boolean  "satisfied"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["example_id"], name: "index_example_truths_on_example_id"
-    t.index ["property_id"], name: "index_example_truths_on_property_id"
   end
 
   create_table "examples", force: :cascade do |t|

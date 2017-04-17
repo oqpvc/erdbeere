@@ -126,6 +126,6 @@ end
 ```
 
 As one can see, the implications on the level of examples work recursively: Even
-though we never had an ExampleTruth that stated that for commutative *base
+though we never had an ExampleFact that stated that for commutative *base
 rings* (and not *rings*) left and right Noetherian are equivalent, the logic
 engine derives those kind of statements from the bottom up.

@@ -36,4 +36,12 @@ FactoryGirl.define do
     description { Faker::Hipster.paragraph }
     structure
   end
+
+  factory :example_fact do
+    satisfied { Faker::Boolean.boolean }
+    example
+    before(:create) do |et|
+      et.property = FactoryGirl.create(:property, structure: et.example.structure)
+    end
+  end
 end

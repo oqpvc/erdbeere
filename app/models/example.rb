@@ -1,5 +1,5 @@
 class Example < ApplicationRecord
-  has_many :example_truths
+  has_many :example_facts
   has_many :building_block_realizations
   belongs_to :structure
   has_many :explanations, as: :explainable
@@ -18,11 +18,11 @@ class Example < ApplicationRecord
   end
 
   def hardcoded_flat_truths
-    example_truths.find_all { |t| t.satisfied == true }.map { |t| t.property.to_atom }
+    example_facts.find_all { |t| t.satisfied == true }.map { |t| t.property.to_atom }
   end
 
   def hardcoded_flat_falsehoods
-     example_truths.find_all { |t| t.satisfied == false }.map { |t| t.property.to_atom }
+     example_facts.find_all { |t| t.satisfied == false }.map { |t| t.property.to_atom }
   end
 
   def hardcoded_flat_truths_as_properties
@@ -46,7 +46,7 @@ class Example < ApplicationRecord
       end
     end
 
-    a += example_truths.to_a.find_all { |et| et.satisfied == test }.map do |et|
+    a += example_facts.to_a.find_all { |et| et.satisfied == test }.map do |et|
       Atom.find_or_create_by({stuff_w_props: structure, property: et.property})
     end.to_a
 
@@ -72,6 +72,7 @@ class Example < ApplicationRecord
   # this is really expensive! use with care!
   def violated_properties(with_implications = false)
     sat = satisfied_atoms
+
     exclusions = sat.find_all do |a|
       a.stuff_w_props == structure
     end.map { |a| a.property_id }
@@ -81,7 +82,11 @@ class Example < ApplicationRecord
     props = Property.where('structure_id = ?', structure.id)
     props = props.where.not(id: exclusions)
 
-    if with_implications
+    if props.count == 0
+      return []
+    end
+
+    if with_implications == true
       bad_props = []
       used_implications = {}
       props.to_a.each do |p|
@@ -96,13 +101,17 @@ class Example < ApplicationRecord
     else
       props.to_a.find_all do |p|
         nsat = (sat + [p.to_atom]).all_that_follows
-        (nsat & hardcoded_falsehoods).empty?
+        not (nsat & hardcoded_falsehoods).empty?
       end
     end
   end
 
   def computable_violations
-    computable_violations_with_implications.first
+    vp = violated_properties(with_implications: false)
+
+    vp.map do |p|
+      p.to_atom
+    end + hardcoded_falsehoods
   end
 
   def computable_violations_with_implications
@@ -146,7 +155,7 @@ class Example < ApplicationRecord
       methods = {true => 'satisfies?', false => 'violates?'}
       raise 'not implemented' unless atom.stuff_w_props == structure
       raise "already set to #{not value}" if self.send(methods[(not value)], atom)
-      ExampleTruth.find_or_create_by({example: self, property: atom.property, satisfied: value})
+      ExampleFact.find_or_create_by({example: self, property: atom.property, satisfied: value})
     end
   end
 end

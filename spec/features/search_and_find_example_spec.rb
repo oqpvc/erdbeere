@@ -50,7 +50,7 @@ RSpec.describe "the search and find", type: :feature do
     s = create(:structure)
     p = create(:property, structure: s)
     e = create(:example, structure: s)
-    ExampleTruth.create({example: e, property: p, satisfied: true})
+    ExampleFact.create({example: e, property: p, satisfied: true})
     visit main_search_path
     select(p.name, from: t('main.search.satisfies'))
     click_button t('main.search.search_button')
