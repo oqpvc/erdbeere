@@ -8,18 +8,18 @@
           <div class="content">
             <h5 class="title"><%= I18n.t("building_block_realizations.show.hardcoded_truths", :default => "Hardcoded Truths") %></h5>
             <ul>
-              <% bbr.realization.atoms_from_example_truths.each do |atom| %>
+              <% bbr.realization.hardcoded_truths.each do |atom| %>
                 <%= render 'atoms/show', atom: atom %>
               <% end %>
             </ul>
           </div>
         </article>
-        <% unless bbr.realization.falsehoods.empty? %>
+        <% unless bbr.realization.hardcoded_falsehoods.empty? %>
           <article class="tile is-child notification is-danger">
             <div class="content">
               <h5 class="title"><%= I18n.t("building_block_realizations.show.hardcoded_falsehoods", :default => "Hardcoded Falsehoods") %></h5>
               <ul id="falsehoods">
-                <% bbr.realization.falsehoods.each do |atom| %>
+                <% bbr.realization.hardcoded_falsehoods.each do |atom| %>
                   <%= render 'atoms/show', atom: atom, modifier: t('logic.is_not') %>
                 <% end %>
               </ul>

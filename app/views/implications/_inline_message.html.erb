@@ -1,4 +1,5 @@
-<article class="message is-success derivation" id="usage-of-implication-<%= implication.id %>">
+<% success = 'success' if local_assigns[:success].nil? %>
+<article class="message is-<%= success %> derivation" id="usage-of-implication-<%= implication.id %>">
   <p class="message-body">
     <%= content_tag(:strong, t('implications.if')) %>
     <% (implication.atoms - [implication.atoms.last]).each do |a| %>

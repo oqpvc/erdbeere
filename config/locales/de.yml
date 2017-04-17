@@ -21,6 +21,7 @@ de:
       title: Alle Beispiele, die ich kenne
     show:
       building_blocks: Bausteine
+      derived_falsehoods: Abgeleitete Verletzungen
       derived_truths: Abgeleitete Wahrheiten
       description: Beschreibung
       hardcoded_falsehoods: Hinterlegte Verletzungen
@@ -38,7 +39,7 @@ de:
   implications:
     and: und
     if: Wenn
-    then: "dann:"
+    then: 'dann:'
   layouts:
     application:
       error: Fehler

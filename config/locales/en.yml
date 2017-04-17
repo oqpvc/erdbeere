@@ -21,6 +21,7 @@ en:
       title: All examples that I know of
     show:
       building_blocks: Building blocks
+      derived_falsehoods: Derived falsehoods
       derived_truths: Derived truths
       description: Description
       hardcoded_falsehoods: Hardcoded falsehoods

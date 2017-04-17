@@ -1,5 +1,5 @@
 class ExampleTruth < ApplicationRecord
-  belongs_to :example
+  belongs_to :example, touch: true
   belongs_to :property
 
   validates :example, presence: true

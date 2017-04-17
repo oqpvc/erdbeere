@@ -13,7 +13,14 @@ rp = {}
   ['left Noetherian', 'linksnoethersch'],
   ['right Noetherian', 'rechtsnoethersch'],
   ['commutative', 'kommutativ'],
-  ['absolutely flat', 'von Neumann regulär']
+  ['absolutely flat', 'von Neumann regulär'],
+  ['Euclidean domain', 'euklidisch'],
+  ['UFD', 'faktorieller Ring'],
+  ['integral domain', 'Integritätbereich'],
+  ['PID', 'Hauptidealring'],
+  ['integrally closed domain', 'normal'],
+  ['Dedekind', 'Dedekind'],
+  ['field', 'Körper']
 ].map do |i|
   rp[i.first] = Property.create do |p|
     p.name_en = i.first
@@ -24,14 +31,46 @@ end
 
 [rp['commutative'], rp['left Noetherian']].is_equivalent! [rp['commutative'], rp['right Noetherian']]
 
+rp['field'].implies! rp['Euclidean domain']
+rp['Euclidean domain'].implies! rp['PID']
+rp['PID'].implies! [rp['UFD'], rp['Dedekind']]
+rp['Dedekind'].implies! [rp['integrally closed domain'], rp['left Noetherian']]
+rp['UFD'].implies! rp['integrally closed domain']
+rp['integrally closed domain'].implies! rp['integral domain']
+rp['integral domain'].implies! [rp['commutative'], rp['unitary']]
+
 zee = Example.create do |e|
   e.structure = ring
   e.description_en = 'Integers'
   e.description_de = '$\mathbb Z$'
 end
 
-zee.satisfies! [rp['commutative'], rp['unitary'], rp['left Noetherian']]
-zee.violates! rp['absolutely flat']
+zee.satisfies! [rp['Euclidean domain'], rp['left Noetherian']]
+zee.violates! [rp['absolutely flat'], rp['field']]
+
+pid_but_not_euclidean = Example.create do |e|
+  e.structure = ring
+  e.description = '$\mathbb Z[\frac{1+\sqrt{-19}}{2}]$'
+end
+
+pid_but_not_euclidean.satisfies! rp['PID']
+pid_but_not_euclidean.violates! [rp['Euclidean domain'], rp['absolutely flat']]
+
+ufd_but_not_pid = Example.create do |e|
+  e.structure = ring
+  e.description = '$\mathbb Z[X]$'
+end
+
+ufd_but_not_pid.satisfies! rp['UFD']
+ufd_but_not_pid.violates! [rp['PID'], rp['absolutely flat']]
+
+dedekind_but_not_ufd = Example.create do |e|
+  e.structure = ring
+  e.description = '$\mathbb Z[\sqrt{-5}]$'
+end
+
+dedekind_but_not_ufd.satisfies! rp['Dedekind']
+dedekind_but_not_ufd.violates! [rp['absolutely flat'], rp['UFD']]
 
 right_not_left_noeth = Example.create do |e|
   e.structure = ring

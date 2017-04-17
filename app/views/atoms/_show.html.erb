@@ -1,10 +1,11 @@
 <% modifier = t('logic.is') if local_assigns[:modifier].nil? %>
+<% success = 'success' if local_assigns[:success].nil? %>
 <li>
-  <%= render("atoms/inline_atom", atom: atom, modifier: modifier) %>
+  <%= render("atoms/inline_atom", atom: atom, modifier: modifier, success: success) %>
   <% unless local_assigns[:implication].nil? %>
     <span class="icon is-small">
       <i class="fa fa-plus-square toggle-derivation"  id="implication-<%= implication.id %>"></i>
     </span>
-    <%= render("implications/inline_message", implication: implication) %>
+    <%= render("implications/inline_message", implication: implication, success: success) %>
   <% end %>
 </li>

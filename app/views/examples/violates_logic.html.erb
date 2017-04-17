@@ -15,7 +15,7 @@
       <div class="content">
         <h3 class="title"><%= I18n.t("examples.violates_logic.the_following_additional_truths_were_derived", :default => "The following additional truths were derived:") %></h3>
         <ul>
-          <% @all_that_is_satisfied_with_implications.second.each_key do |i| %>
+          <% @satisfied_atoms_with_implications.second.each_key do |i| %>
             <% unless @satisfies.include?(i.implies) %>
               <%= render 'atoms/show', :atom => i.implies, :modifier => t('logic.is'), :implication => i %>
             <% end %>
@@ -37,7 +37,7 @@
       <div class="content">
         <h3 class="title"><%= I18n.t("examples.violates_logic.i_found_the_following_contradiction", :default => "I found the following contradiction:") %></h3>
         <ul>
-          <% (@all_that_is_satisfied & @violates).each do |atom| %>
+          <% (@satisfied_atoms & @violates).each do |atom| %>
             <%= render 'atoms/show', :atom => atom, :modifier => t('logic.is_and_is_not') %>
           <% end %>
         </ul>
