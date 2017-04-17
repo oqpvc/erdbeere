@@ -4,17 +4,6 @@ scheme = Structure.create do |s|
   s.name_de = 'Schema'
 end
 
-noeth_scheme = Property.create do |p|
-  p.structure = scheme
-  p.name_en = 'Noetherian'
-  p.name_de = 'noethersch'
-end
-
-qcqs_scheme = Property.create do |p|
-  p.structure = scheme
-  p.name = 'qcqs'
-end
-
 sp = {}
 [
   ['Noetherian', 'noethersch'],
