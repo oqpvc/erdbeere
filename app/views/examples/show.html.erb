@@ -1,5 +1,5 @@
+<% provide(:title, I18n.t('example.show.title') + ' ' + @example.description[0..100]) %>
 <% cache @example do %>
-  <% provide(:title, I18n.t('example.show.title') + ' ' + @example.description[0..100]) %>
   <div class="tile is-ancestor">
     <% if @example.building_block_realizations.count == 0 %>
       <% width = 4 %>
