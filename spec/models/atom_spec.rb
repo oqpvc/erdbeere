@@ -28,6 +28,29 @@ RSpec.describe Atom, type: :model do
     expect(as[s].second.follows_from?(as[b1].first, as[s].first, as[b2].second)).to be(true)
   end
 
+  it 'gives the same implications whether called with with_implications or not' do
+    s = create(:structure)
+    b1 = create(:building_block, explained_structure: s)
+    b2 = create(:building_block, explained_structure: s)
+
+    ps = {}
+    as = {}
+    [s, b1, b2].each do |i|
+      ps[i] = [create(:property, structure: i.structure), create(:property, structure: i.structure)]
+      as[i] = [Atom.create(stuff_w_props: i, property: ps[i].first), Atom.create(stuff_w_props: i, property: ps[i].second)]
+    end
+
+    [as[s].first, as[b1].first].implies! as[b2].first
+    [as[b2].first, as[b1].first].implies! as[b2].second
+    [as[s].first, as[b2].first].implies! as[b1].first
+    [as[b2].first, as[b2].second].implies! as[s].second
+
+    t1 = [as[s].first, as[b1].first].all_that_follows.uniq.sort
+    t2 = [as[s].first, as[b1].first].all_that_follows_with_implications.first.uniq.sort
+
+    expect(t1 == t2).to be(true)
+  end
+
   it "doesn't allow duplicates" do
     %i[of_structure of_bb].each do |_type|
       a = create(:atom, :of_structure)
