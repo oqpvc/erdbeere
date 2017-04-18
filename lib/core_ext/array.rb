@@ -1,9 +1,8 @@
 # coding: utf-8
+
 # if not called with an upper limit, this runs forever!
 def until_stable(function, seed, iterations = -1)
-  if iterations == 0
-    return seed
-  end
+  return seed if iterations.zero?
 
   tmp = seed
 
@@ -12,14 +11,15 @@ def until_stable(function, seed, iterations = -1)
   if tmp == seed
     seed
   else
-    until_stable(function, seed, iterations-1)
+    until_stable(function, seed, iterations - 1)
   end
 end
 
 class Array
   def of_atoms?
-    self.find_all { |m| not m.kind_of?(Atom) }.empty?
+    find_all { |m| !m.is_a?(Atom) }.empty?
   end
+
   def all_that_follows
     raise 'Not all members of Array are Atoms' unless of_atoms?
 
@@ -36,39 +36,31 @@ class Array
       end
       tmp2.uniq!
     end
-    return tmp1
+    tmp1
+    #until_stable(:follows_in_one_iteration, self)
   end
 
   def all_that_follows_with_implications
     until_stable(:follows_in_one_iteration_with_implications, self)
   end
 
-  def follows_in_one_iteration
-    new_atoms = []
-
-    # using .all.to_a is actually correct here! benchmarking shows a factor 4
-    # compared to find_each (dafuq?!)
-    Premise.where(atom: self).includes(implication: :atoms).all.to_a do |pr|
-      if (pr.implication.atoms - self).empty?
-        new_atoms.push(pr.implication.implies)
-      end
-    end
-
-    (self + new_atoms).uniq
-  end
-
   def follows_in_one_iteration_with_implications
     imps_w_atoms = {}
     atoms = []
-    if (not self.second.nil?) && self.second.kind_of?(Hash)
-      imps_w_atoms = self.second
-      atoms = self.first
+
+    if !second.nil? && second.is_a?(Hash)
+      imps_w_atoms = second
+      atoms = first
     else
       atoms = self
     end
 
-    interesting_implications = Implication.all.to_a.find_all do |i|
-      (i.atoms - atoms).empty? && (not atoms.include?(i.implies))
+    interesting_implications = []
+
+    Premise.where(atom: self).includes(implication: :atoms).all.to_a do |pr|
+      if (pr.implication.atoms - self).empty? && !atoms.include?(pr.implication.implies)
+        interesting_implications.push(pr.implication)
+      end
     end
 
     interesting_implications.each do |i|
@@ -77,17 +69,17 @@ class Array
 
     # .uniq is actually necessary, as multiple implications might have the same
     # consequence
-    return [(atoms + imps_w_atoms.values).uniq, imps_w_atoms]
+    [(atoms + imps_w_atoms.values).uniq, imps_w_atoms]
   end
 
   def implies!(atom)
     raise 'Not all members of Array are Atoms' unless of_atoms?
-    if atom.kind_of?(Array) then
+    if atom.is_a?(Array)
       atom.each do |a|
-        self.implies! a
+        implies! a
       end
-    elsif atom.kind_of?(Atom) then
-      Implication.create({atoms: self, implies: atom})
+    elsif atom.is_a?(Atom)
+      Implication.create(atoms: self, implies: atom)
     else
       raise 'Argument not of type Atom'
     end
@@ -95,10 +87,10 @@ class Array
 
   def is_equivalent!(atoms)
     atoms.each do |a|
-      Implication.create({atoms: self, implies: a})
+      Implication.create(atoms: self, implies: a)
     end
-    self.each do |a|
-      Implication.create({atoms: atoms, implies: a})
+    each do |a|
+      Implication.create(atoms: atoms, implies: a)
     end
   end
 end

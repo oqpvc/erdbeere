@@ -51,11 +51,11 @@ unitary = Property.create do |p|
   p..definition = '…'
 end
 …
-l_noeth = Property.create({name: 'left Noetherian', structure: ring})
-r_noeth = Property.create({name: 'right Noetherian', structure: ring})
-comm = Property.create({name: 'commutative', structure: ring})
-vnr = Property.create({name: 'von Neumann regular (aka absolutely flat)',
-                        structure: ring})
+l_noeth = Property.create(name: 'left Noetherian', structure: ring)
+r_noeth = Property.create(name: 'right Noetherian', structure: ring)
+comm = Property.create(name: 'commutative', structure: ring)
+vnr = Property.create(name: 'von Neumann regular (aka absolutely flat)',
+                        structure: ring)
 
 ```
 
@@ -65,26 +65,26 @@ more complicated, as their properties may depend on their ground ring.
 Structures can hence have building blocks.
 
 ```ruby
-rmod = Structure.create({name: '$R$-(left-)Module'})
-base_ring = BuildingBlock.create({name: 'base ring',
+rmod = Structure.create(name: '$R$-(left-)Module')
+base_ring = BuildingBlock.create(name: 'base ring',
                                    explained_structure: rmod,
                                    structure: ring, definition: 'A ' +
                                    'ring homomorphism $R\longrightarrow ' +
-                                   '\mathrm{End}(M)$ …'})
+                                   '\mathrm{End}(M)$ …')
 ```
 
 Now we want to encode the following result: “A finitely generated
 $R$-left-module over a left Noetherian ring is itself Noetherian”.
 
 ```ruby
-fin_gen = Property.create({name: 'finitely generated', structure: rmod})
-noeth_module = Property.create({name: 'ascending chain condition for ' +
-                               'submodules', structure: rmod})
+fin_gen = Property.create(name: 'finitely generated', structure: rmod)
+noeth_module = Property.create(name: 'ascending chain condition for ' +
+                               'submodules', structure: rmod)
 
-base_ring_is_lnoeth = Atom.create({stuff_w_props: base_ring, property:
-                                   l_noeth})
-module_is_fg = Atom.create({stuff_w_props: rmod, property: fin_gen})
-module_has_acc = Atom.create({stuff_w_props: rmod, property: noeth_module})
+base_ring_is_lnoeth = Atom.create(stuff_w_props: base_ring, property:
+                                   l_noeth)
+module_is_fg = Atom.create(stuff_w_props: rmod, property: fin_gen)
+module_has_acc = Atom.create(stuff_w_props: rmod, property: noeth_module)
 
 [module_is_fg, base_ring_is_lnoeth].implies! module_has_acc
 ```
@@ -96,13 +96,13 @@ building blocks (e. g., for an $R$-module we first need a ring $R$). Consider
 the following code snippet:
 
 ```ruby
-zee = Example.create({structure: ring})
+zee = Example.create(structure: ring)
 zee.satisfies! [comm, l_noeth, vnr]
 zee.violates! vnr
 
-zee_r = Example.create({structure: rmod})
-BuildingBlockRealization.create({example: zee_r, building_block:
-  base_ring, realization: zee})
+zee_r = Example.create(structure: rmod)
+BuildingBlockRealization.create(example: zee_r, building_block:
+  base_ring, realization: zee)
 zee_r.satisfies! module_is_fg
 ```
 
@@ -116,10 +116,10 @@ Working with it roughly looks like this:
 [comm, l_noeth].is_equivalent! [comm, r_noeth]
 
 zee_r.satisfies?(module_has_acc)
-zee_r.satisfies?(Atom.find_or_create_by({stuff_w_props:
+zee_r.satisfies?(Atom.find_or_create_by(stuff_w_props:
                                                    base_ring,
                                                    property:
-                                                   r_noeth}))
+                                                   r_noeth))
 zee_r.all_that_is_true.each do |a|
   puts a.to_s
 end

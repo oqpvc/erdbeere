@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "the list feature", type: :feature do
+RSpec.describe 'the list feature', type: :feature do
   it 'lists examples' do
     e1 = create(:example)
     visit '/'

@@ -10,9 +10,6 @@ class ImplicationUniqueness < ActiveModel::Validator
   end
 end
 
-
-
-
 class Implication < ApplicationRecord
   # a premise is a collection of atoms connected by a logical AND
   # "has_many :premises" should be "belongs_to_many :premises".
@@ -26,8 +23,8 @@ class Implication < ApplicationRecord
 
   def to_s
     base_struct = implies.stuff_w_props.structure
-    s = "*IF* "
-    s << self.atoms.map { |a| '(' + a.to_s + ')' }.join(" *AND* ")
+    s = '*IF* '
+    s << atoms.map { |a| '(' + a.to_s + ')' }.join(' *AND* ')
     s << " *THEN* #{base_struct.name} *IS* #{implies.property.name}"
     s
   end

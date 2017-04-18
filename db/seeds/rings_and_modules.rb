@@ -3,7 +3,7 @@
 ring = Structure.create do |r|
   r.name_en = 'Ring'
   r.name_de = 'Ring'
-  r.definition_en = 'A ring $R$ is an abelian group together with a ' +
+  r.definition_en = 'A ring $R$ is an abelian group together with a ' \
                     'map $R\times R …'
 end
 
@@ -12,15 +12,15 @@ rp = {}
   ['unitary', 'mit Eins'],
   ['left Noetherian', 'linksnoethersch'],
   ['right Noetherian', 'rechtsnoethersch'],
-  ['commutative', 'kommutativ'],
+  %w[commutative kommutativ],
   ['absolutely flat', 'von Neumann regulär'],
   ['Euclidean domain', 'euklidisch'],
   ['UFD', 'faktorieller Ring'],
   ['integral domain', 'Integritätbereich'],
-  ['PID', 'Hauptidealring'],
+  %w[PID Hauptidealring],
   ['integrally closed domain', 'normal'],
-  ['Dedekind', 'Dedekind'],
-  ['field', 'Körper']
+  %w[Dedekind Dedekind],
+  %w[field Körper]
 ].map do |i|
   rp[i.first] = Property.create do |p|
     p.name_en = i.first
@@ -107,8 +107,8 @@ base_ring = BuildingBlock.create do |b|
   b.name_en = 'base ring'
   b.explained_structure = rmod
   b.structure = ring
-  b.definition_en = 'A ring homomorphism $R\longrightarrow ' +
-                     '\mathrm{End}(M)$ …'
+  b.definition_en = 'A ring homomorphism $R\longrightarrow ' \
+                    '\mathrm{End}(M)$ …'
 end
 
 mp = {}
@@ -123,11 +123,10 @@ mp = {}
   end.to_atom
 end
 
-base_ring_is_lnoeth = Atom.create({stuff_w_props: base_ring, property:
-                                                               rp['left Noetherian'].property})
+base_ring_is_lnoeth = Atom.create(stuff_w_props: base_ring, property:
+                                                               rp['left Noetherian'].property)
 
 [base_ring_is_lnoeth, mp['finitely generated']].implies! mp['ACC for submodules']
-
 
 zee_r = Example.create do |e|
   e.structure = rmod
@@ -135,8 +134,8 @@ zee_r = Example.create do |e|
   e.description_en = '$\mathbb Z^r$ as a module over the integers'
 end
 
-BuildingBlockRealization.create({example: zee_r, building_block:
-  base_ring, realization: zee})
+BuildingBlockRealization.create(example: zee_r, building_block:
+  base_ring, realization: zee)
 
 zee_r.satisfies! mp['finitely generated']
 
@@ -146,6 +145,6 @@ fg_not_noeth_mod = Example.create do |e|
   e.description_de = '$\mathbb Z[X_1, X_2, \dots]$ als Module über sich selbst'
 end
 
-BuildingBlockRealization.create({example: fg_not_noeth_mod, building_block: base_ring, realization: comm_not_noeth})
+BuildingBlockRealization.create(example: fg_not_noeth_mod, building_block: base_ring, realization: comm_not_noeth)
 fg_not_noeth_mod.satisfies! mp['finitely generated']
 fg_not_noeth_mod.violates! mp['ACC for submodules']

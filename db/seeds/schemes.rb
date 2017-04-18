@@ -1,4 +1,5 @@
 # coding: utf-8
+
 scheme = Structure.create do |s|
   s.name_en = 'Scheme'
   s.name_de = 'Schema'
@@ -6,8 +7,8 @@ end
 
 sp = {}
 [
-  ['Noetherian', 'noethersch'],
-  ['qcqs', 'qcqs']
+  %w[Noetherian noethersch],
+  %w[qcqs qcqs]
 ].map do |i|
   sp[i.first] = Property.create do |p|
     p.name_en = i.first
@@ -37,33 +38,33 @@ end
 
 mp = {}
 [
-  ['affine', 'affin'],
+  %w[affine affin],
   ['closed immersion', 'abgeschlossene Immersion'],
-  ['étale', 'étale'],
+  %w[étale étale],
   ['faithfully flat', 'treuflach'],
   ['finite type', 'von endlichem Typ'],
-  ['finite', 'endlich'],
+  %w[finite endlich],
   ['finitely presented', 'endlich präsentiert'],
-  ['flat', 'flach'],
-  ['immersion', 'Immersion'],
+  %w[flat flach],
+  %w[immersion Immersion],
   # what's the right translation for integral?
   ['integral', 'affin und universell abgeschlossen'],
-  ['isomorphism', 'Isomorphismus'],
+  %w[isomorphism Isomorphismus],
   ['locally of finite presentation', 'lokal endlich präsentiert'],
-  ['monomorphism', 'Monomorphismus'],
+  %w[monomorphism Monomorphismus],
   ['open immersion', 'offene Immersion'],
-  ['projective', 'projektiv'],
-  ['proper', 'eigentlich'],
+  %w[projective projektiv],
+  %w[proper eigentlich],
   ['purely inseparable', 'rein inseparabel'],
-  ['qcqs', 'qcqs'],
+  %w[qcqs qcqs],
   ['quasi-affine', 'quasi-affin'],
   ['quasi-compact', 'quasikompakt'],
   ['quasi-finite', 'quasi-endlich'],
   ['quasi-projective', 'quasiprojektiv'],
   ['quasi-separated', 'quasisepariert'],
-  ['separated', 'separiert'],
-  ['smooth', 'glatt'],
-  ['surjective', 'surjektiv'],
+  %w[separated separiert],
+  %w[smooth glatt],
+  %w[surjective surjektiv],
   ['universal homeomorphism', 'universeller Homöomorphismus'],
   ['universally closed', 'universell abgeschlossen'],
   ['universally open', 'universell offen']
@@ -81,12 +82,12 @@ mp['finite'].is_equivalent! [mp['quasi-affine'], mp['proper']]
 mp['integral'].is_equivalent! [mp['affine'], mp['universally closed']]
 mp['qcqs'].is_equivalent! [mp['quasi-compact'], mp['quasi-separated']]
 
-
 mp['isomorphism'].implies! [
   mp['closed immersion'],
   mp['universal homeomorphism'],
   mp['open immersion'],
-  mp['faithfully flat']]
+  mp['faithfully flat']
+]
 
 mp['closed immersion'].implies! [mp['finite'], mp['immersion'], mp['quasi-compact']]
 mp['immersion'].implies! mp['monomorphism']
@@ -118,9 +119,8 @@ mp['finite type'].implies! mp['quasi-compact']
 mp['finitely presented'].implies! [mp['finite type'], mp['qcqs']]
 mp['proper'].implies! [mp['finite type'], mp['universally closed'], mp['separated']]
 
-
-domain_is_noeth = Atom.create({stuff_w_props: domain, property: sp['Noetherian'].property})
-codomain_is_qcqs = Atom.create({stuff_w_props: codomain, property: sp['qcqs'].property})
+domain_is_noeth = Atom.create(stuff_w_props: domain, property: sp['Noetherian'].property)
+codomain_is_qcqs = Atom.create(stuff_w_props: codomain, property: sp['qcqs'].property)
 
 [domain_is_noeth, mp['open immersion']].implies! [mp['quasi-compact'], mp['immersion']]
 [codomain_is_qcqs, mp['proper'], mp['quasi-projective']].implies! mp['projective']
