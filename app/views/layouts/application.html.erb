@@ -11,7 +11,16 @@
       <div class="nav-left">
         <h1><%= link_to "ErDBeere", :root, class: "nav-item" %></h1>
       </div>
-      <div class="nav-center"><%= link_to I18n.t("layouts.application.search", :default => 'Search'), main_search_path, class: 'nav-item' %></div>
+      <div class="nav-center">
+        <div class="nav-item">
+          <a href="<%= main_search_path %>" class="button is-info is-outlined">
+            <span class="icon">
+              <i class="fa fa-search"></i>
+            </span>
+            <span><%= t('layouts.application.search') %></span>
+          </a>
+        </div>
+      </div>
     </nav>
     <% if flash.any? %>
       <% if not flash[:error].blank? %>

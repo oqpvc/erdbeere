@@ -16,3 +16,4 @@ $(document).on 'turbolinks:load', ->
       art.slideUp('slow') unless art.attr('id') is toShow
     $("#"+toShow).slideDown('slow')
 
+  $(".menu-list a").first().click()

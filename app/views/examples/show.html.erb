@@ -59,13 +59,11 @@
         <article class="tile is-child notification is-success">
           <div class="content">
             <h3 class="title"><%= I18n.t("examples.show.derived_truths", :default => "Derived truths") %></h3>
-            <ul>
-              <% @example.satisfied_atoms_with_implications.second.each_pair do |implication, atom| %>
-                <% unless @example.hardcoded_truths.include?(atom) %>
-                  <%= render 'atoms/show', atom: atom, modifier: t('logic.is'), implication: implication %>
-                <% end %>
+            <% @example.satisfied_atoms_with_implications.second.each_pair do |implication, atom| %>
+              <% unless @example.hardcoded_truths.include?(atom) %>
+                <%= render 'atoms/show', atom: atom, modifier: t('logic.is'), implication: implication %>
               <% end %>
-            </ul>
+            <% end %>
           </div>
         </article>
       <% end %>
