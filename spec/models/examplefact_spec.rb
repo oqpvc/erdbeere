@@ -16,16 +16,16 @@ RSpec.describe ExampleFact, type: :model do
     expect(ExampleFact.create({example: e2, property: p2, satisfied: true}).save).to be(true)
   end
 
-  # it "doesn't allow falsehoods that already follow from previous data" do
-  #   s = create(:structure)
-  #   p1 = create(:property, structure: s)
-  #   p2 = create(:property, structure: s)
-  #   p1.to_atom.implies! p2.to_atom
+  it "doesn't allow falsehoods that already follow from previous data" do
+    s = create(:structure)
+    p1 = create(:property, structure: s)
+    p2 = create(:property, structure: s)
+    p1.to_atom.implies! p2.to_atom
 
-  #   e = create(:example, structure: s)
-  #   expect(ExampleFact.create({example: e, property: p1, satisfied: true}).save).to be(true)
-  #   expect(ExampleFact.create({example: e, property: p2, satisfied: false}).save).to be(false)
-  # end
+    e = create(:example, structure: s)
+    expect(ExampleFact.create({example: e, property: p1, satisfied: true}).save).to be(true)
+    expect(ExampleFact.create({example: e, property: p2, satisfied: false}).save).to be(false)
+  end
 
   it "doesn't allow duplicates" do
     s = create(:structure)

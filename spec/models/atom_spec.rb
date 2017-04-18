@@ -18,6 +18,7 @@ RSpec.describe Atom, type: :model do
     [as[b2].first, as[b1].first].implies! as[s].first
     [as[s].first, as[b2].first].implies! as[b1].first
 
+
     expect(as[s].first.follows_from?(as[b1].first, as[b2].first)).to be(true)
     expect(as[b1].first.follows_from?(as[s].first, as[b2].first)).to be(true)
     expect(as[b2].first.follows_from?(as[s].first, as[b1].first)).to be(true)

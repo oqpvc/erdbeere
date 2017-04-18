@@ -29,7 +29,10 @@ RSpec.describe Example, type: :model do
   it "know how to derive negative properties from example_facts" do
     et = create(:example_fact, satisfied: false)
     a = create(:property, structure: et.example.structure).to_atom
-    a.implies! et.property.to_atom
+    b = create(:property, structure: et.example.structure).to_atom
+    a.implies! b
+    b.implies! et.property.to_atom
     expect(et.reload_example.violates?(a)).to be(true)
+    expect(et.reload_example.violates?(b)).to be(true)
   end
 end
