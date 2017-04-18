@@ -39,6 +39,8 @@ rp['UFD'].implies! rp['integrally closed domain']
 rp['integrally closed domain'].implies! rp['integral domain']
 rp['integral domain'].implies! [rp['commutative'], rp['unitary']]
 
+[rp['Dedekind'], rp['UFD']].implies! rp['PID']
+
 zee = Example.create do |e|
   e.structure = ring
   e.description_en = 'Integers'
