@@ -67,13 +67,15 @@
           </div>
         </article>
       <% end %>
-      <% unless (@example.computable_violations - @example.hardcoded_falsehoods).empty? %>
+      <% unless (@example.computable_violations_with_implications.first - @example.hardcoded_falsehoods).empty? %>
         <article class="tile is-child notification is-danger">
           <div class="content">
             <h3 class="title"><%= I18n.t("examples.show.derived_falsehoods") %></h3>
             <ul>
-              <%  (@example.computable_violations - @example.hardcoded_falsehoods).each do |a| %>
-                <%= render 'atoms/show', atom: a, modifier: t('logic.is_not') %>
+              <%  @example.computable_violations_with_implications.second.each_pair do |implication, atom| %>
+                <% unless @example.hardcoded_falsehoods.include?(atom) %>
+                  <%= render 'atoms/show', atom: atom, modifier: t('logic.is_not'), implication: implication, success: 'danger' %>
+                <% end %>
               <% end %>
             </ul>
           </div>

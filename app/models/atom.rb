@@ -12,6 +12,12 @@ class Atom < ApplicationRecord
   validates_with EqualityTest, a: 'property.structure', b: 'stuff_w_props.structure'
   validates :property, uniqueness: { scope: :stuff_w_props }
 
+  after_commit :touch_potentially_relevant_examples
+
+  def touch_potentially_relevant_examples
+    Example.where(structure: property.structure).map(&:touch)
+  end
+
   def to_s
     "#{stuff_w_props.name} *IS* #{property.name}"
   end

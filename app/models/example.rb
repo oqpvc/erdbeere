@@ -1,12 +1,13 @@
 class Example < ApplicationRecord
+  include CacheIt
   has_many :example_facts
   has_many :building_block_realizations
   belongs_to :structure
   has_many :explanations, as: :explainable
-  has_many :appearances_as_building_block_realizations, class_name: 'BuildingBlockRealization', foreign_key: 'example_id'
+  has_many :appearances_as_building_block_realizations, class_name: 'BuildingBlockRealization', foreign_key: 'realization_id'
 
   validates :structure, presence: true
-  before_save :touch_appearances_as_building_block_realizations
+  after_commit :touch_appearances_as_building_block_realizations
 
   translates :description, fallbacks_for_empty_translations: true
   globalize_accessors
@@ -54,24 +55,28 @@ class Example < ApplicationRecord
   def hardcoded_truths
     facts(true)
   end
+  cache_it :hardcoded_truths
 
   def satisfied_atoms
     facts(true).all_that_follows
   end
+  cache_it :satisfied_atoms
 
   def satisfied_atoms_with_implications
     facts(true).all_that_follows_with_implications
   end
+  cache_it :satisfied_atoms_with_implications
 
   def hardcoded_falsehoods
     facts(false)
   end
+  cache_it :hardcoded_falsehoods
 
   # this is really expensive! use with care!
   def violated_properties(with_implications = false)
     sat = satisfied_atoms
 
-    exclusions = sat.find_all do |a|
+    exclusions = sat.to_a.find_all do |a|
       a.stuff_w_props == structure
     end.map(&:property_id)
 
@@ -80,16 +85,17 @@ class Example < ApplicationRecord
     props = Property.where('structure_id = ?', structure.id)
     props = props.where.not(id: exclusions)
 
+    return [[], {}] if props.count.zero? && with_implications
     return [] if props.count.zero?
 
-    if with_implications == true
-      bad_props = []
+    if with_implications === true
+      bad_props = hardcoded_falsehoods_as_properties
       used_implications = {}
       props.to_a.each do |p|
         nsat_w_i = (sat + [p.to_atom]).all_that_follows_with_implications
         next if (nsat_w_i.first & hardcoded_falsehoods).empty?
         violated_atom = (nsat_w_i.first & hardcoded_falsehoods).first
-        used_implications[p] = nsat_w_i.second.key(violated_atom)
+        used_implications[nsat_w_i.second.key(violated_atom)] = p.to_atom
         bad_props.push(p)
       end
       return [bad_props, used_implications]
@@ -106,13 +112,14 @@ class Example < ApplicationRecord
 
     vp.map(&:to_atom) + hardcoded_falsehoods
   end
+  cache_it :computable_violations
 
   def computable_violations_with_implications
-    r = violated_properties(with_implications: true)
+    r = violated_properties(true)
     r.first.map!(&:to_atom)
-    r.push(hardcoded_falsehoods)
     r
   end
+  cache_it :computable_violations_with_implications
 
   def satisfies?(atom)
     # atom might be a property

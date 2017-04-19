@@ -15,7 +15,7 @@ class Implication < ApplicationRecord
   # "has_many :premises" should be "belongs_to_many :premises".
   has_many :premises
   has_many :atoms, through: :premises
-  belongs_to :implies, class_name: 'Atom'
+  belongs_to :implies, class_name: 'Atom', touch: true
   has_many :explanations, as: :explainable
 
   validates :implies, presence: true
