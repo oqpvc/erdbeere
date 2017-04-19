@@ -30,7 +30,7 @@ class Array
     until_stable(:follows_in_one_iteration_with_implications, self)
   end
 
-  def interesting_premises(atoms = self)
+  def interesting_premises(atoms: self)
     Premise.where(atom: atoms).includes(implication: :atoms).where.not(implications: {implies: atoms})
   end
 
@@ -53,7 +53,7 @@ class Array
 
     interesting_implications = []
 
-    interesting_premises(atoms).to_a.each do |pr|
+    interesting_premises(atoms: atoms).to_a.each do |pr|
       if (pr.implication.atoms - atoms).empty?
         interesting_implications.push(pr.implication)
       end

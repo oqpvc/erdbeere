@@ -29,7 +29,7 @@ class ExamplesController < ApplicationController
       flash.now[:warning] = I18n.t('examples.find.flash.nothing_found')
     else
       @hits = @almost_hits.find_all do |e|
-        (@violates - e.violated_properties).empty?
+        (@violates - e.computable_violations).empty?
       end
     end
   end

@@ -10,7 +10,7 @@
 <% unless (@almost_hits-@hits.to_a).blank? %>
   <h2 class="title"><%= I18n.t("examples.find.still_consistent", :default => "Still consistent") %></h2>
   <div class="tile is-ancestor">
-    <% (@almost_hits - @hits).each_slice(3).each do |slice| %>
+    <% (@almost_hits - @hits.to_a).each_slice(3).each do |slice| %>
       <%= render('row_of_search_results', slice: slice) %>
     <% end %>
   </div>

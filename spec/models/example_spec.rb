@@ -26,7 +26,7 @@ RSpec.describe Example, type: :model do
     expect(e_for_s.satisfies?(as[s].second)).to be(false)
   end
 
-  it 'know how to derive negative properties from example_facts' do
+  it 'knows how to derive negative properties from example_facts' do
     et = create(:example_fact, satisfied: false)
     a = create(:property, structure: et.example.structure).to_atom
     b = create(:property, structure: et.example.structure).to_atom

@@ -32,11 +32,11 @@ class Example < ApplicationRecord
     hardcoded_flat_falsehoods.map(&:property)
   end
 
-  def facts(test = [true, false])
+  def facts(test: [true, false])
     a = []
     if building_block_realizations.present?
       a += building_block_realizations.map do |bbr|
-        sub_facts = bbr.realization.facts(test)
+        sub_facts = bbr.realization.facts(test: test)
         # those sub facts are now of the wrong type: the resulting Atoms have
         # stuff_w_props = bbr.realization.structure, not the building block we want!
         sub_facts.map do |st|
@@ -53,27 +53,27 @@ class Example < ApplicationRecord
   end
 
   def hardcoded_truths
-    facts(true)
+    facts(test: true)
   end
   cache_it :hardcoded_truths
 
   def satisfied_atoms
-    facts(true).all_that_follows
+    facts(test: true).all_that_follows
   end
   cache_it :satisfied_atoms
 
   def satisfied_atoms_with_implications
-    facts(true).all_that_follows_with_implications
+    facts(test: true).all_that_follows_with_implications
   end
   cache_it :satisfied_atoms_with_implications
 
   def hardcoded_falsehoods
-    facts(false)
+    facts(test: false)
   end
   cache_it :hardcoded_falsehoods
 
   # this is really expensive! use with care!
-  def violated_properties(with_implications = false)
+  def violated_properties(with_implications: false)
     sat = satisfied_atoms
 
     exclusions = sat.to_a.find_all do |a|
@@ -85,11 +85,11 @@ class Example < ApplicationRecord
     props = Property.where('structure_id = ?', structure.id)
     props = props.where.not(id: exclusions)
 
-    return [[], {}] if props.count.zero? && with_implications
+    return [[], {}] if (props.count.zero? && with_implications)
     return [] if props.count.zero?
 
-    if with_implications === true
-      bad_props = hardcoded_falsehoods_as_properties
+    if with_implications == true
+      bad_props = []
       used_implications = {}
       props.to_a.each do |p|
         nsat_w_i = (sat + [p.to_atom]).all_that_follows_with_implications
@@ -109,15 +109,16 @@ class Example < ApplicationRecord
 
   def computable_violations
     vp = violated_properties(with_implications: false)
+    return hardcoded_falsehoods if vp.empty?
 
     vp.map(&:to_atom) + hardcoded_falsehoods
   end
   cache_it :computable_violations
 
   def computable_violations_with_implications
-    r = violated_properties(true)
+    r = violated_properties(with_implications: true)
     r.first.map!(&:to_atom)
-    r
+    [(r.first + hardcoded_falsehoods).uniq, r.second]
   end
   cache_it :computable_violations_with_implications
 
