@@ -28,6 +28,24 @@ ideal domain is a UFD.
 ErDBeere wants to represent all the data in the answers above, i.e., *concrete
 examples* and *abstract implications*, in the nicest possible manner.
 
+## Installation
+
+Installation is easiest via docker (although `git clone && bundle install`
+should also work just fine.) Use the following environment variables:
+
+- RAILS_ENV
+- SECRET_KEY_BASE
+- PRODUCTION_DATABASE_URL
+
+The following commands should yield a working installation:
+
+```sh
+docker create -e "RAILS_ENV=production" -e … --name erdbeere -p 3000:3000 oqpvc/erdbeere
+docker start erdbeere
+docker exec erdbeere bundle exec rake db:schema:load
+docker exec erdbeere bundle exec rake db:seed
+```
+
 ## Data Structures
 
 The “nicest possible manner” is of course a Web 2.0 application. This is hence a

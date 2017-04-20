@@ -12,5 +12,6 @@ RUN apt-get update && apt-get install -y postgresql-client sqlite3 --no-install-
 
 RUN git clone https://github.com/oqpvc/erdbeere.git .
 RUN bundle install
+RUN bundle exec rake assets:precompile
 
 
