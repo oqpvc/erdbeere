@@ -4,9 +4,9 @@
 # erdbeere
 
 ErDBeere is short for “Erkenntnisfördernde Datenbank zur Beispielerfassung und
--entwicklung” (informative database for the development and management examples)
-and should be thought of as an e-learning tool for higher (i. e., University
-level) mathematics.
+-entwicklung” (informative database for the development and management of
+examples) and should be thought of as an e-learning tool for higher (i. e.,
+University level) mathematics.
 
 It aims to store mathematical examples somewhat like
 the [ring database](http://ringtheory.herokuapp.com) and is supposed to help
