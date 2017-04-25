@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
-  skip_before_action :verify_authenticity_token
-  before_action :set_locale
+  protect_from_forgery
+  skip_after_action :verify_same_origin_request
 
+  before_action :set_locale
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
