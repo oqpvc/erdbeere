@@ -119,8 +119,8 @@ mp['finite type'].implies! mp['quasi-compact']
 mp['finitely presented'].implies! [mp['finite type'], mp['qcqs']]
 mp['proper'].implies! [mp['finite type'], mp['universally closed'], mp['separated']]
 
-domain_is_noeth = Atom.create(stuff_w_props: domain, property: sp['Noetherian'].property)
-codomain_is_qcqs = Atom.create(stuff_w_props: codomain, property: sp['qcqs'].property)
+domain_is_noeth = Atom.create(stuff_w_props: domain, satisfies: sp['Noetherian'].property)
+codomain_is_qcqs = Atom.create(stuff_w_props: codomain, satisfies: sp['qcqs'].property)
 
 [domain_is_noeth, mp['open immersion']].implies! [mp['quasi-compact'], mp['immersion']]
 [codomain_is_qcqs, mp['proper'], mp['quasi-projective']].implies! mp['projective']

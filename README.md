@@ -99,10 +99,10 @@ fin_gen = Property.create(name: 'finitely generated', structure: rmod)
 noeth_module = Property.create(name: 'ascending chain condition for ' +
                                'submodules', structure: rmod)
 
-base_ring_is_lnoeth = Atom.create(stuff_w_props: base_ring, property:
+base_ring_is_lnoeth = Atom.create(stuff_w_props: base_ring, satisfies:
                                    l_noeth)
-module_is_fg = Atom.create(stuff_w_props: rmod, property: fin_gen)
-module_has_acc = Atom.create(stuff_w_props: rmod, property: noeth_module)
+module_is_fg = Atom.create(stuff_w_props: rmod, satisfies: fin_gen)
+module_has_acc = Atom.create(stuff_w_props: rmod, satisfies: noeth_module)
 
 [module_is_fg, base_ring_is_lnoeth].implies! module_has_acc
 ```
@@ -136,7 +136,7 @@ Working with it roughly looks like this:
 zee_r.satisfies?(module_has_acc)
 zee_r.satisfies?(Atom.find_or_create_by(stuff_w_props:
                                                    base_ring,
-                                                   property:
+                                                   satisfies:
                                                    r_noeth))
 zee_r.all_that_is_true.each do |a|
   puts a.to_s

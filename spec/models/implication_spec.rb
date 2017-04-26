@@ -27,14 +27,14 @@ RSpec.describe Atom, type: :model do
     s2 = create(:structure)
     p2 = create(:property, structure: s2)
 
-    fail1 = Atom.create(stuff_w_props: s1, property: p2)
-    fail2 = Atom.create(stuff_w_props: s2, property: p1)
+    fail1 = Atom.create(stuff_w_props: s1, satisfies: p2)
+    fail2 = Atom.create(stuff_w_props: s2, satisfies: p1)
 
     expect(fail1.save).to be(false)
     expect(fail2.save).to be(false)
 
-    success1 = Atom.create(stuff_w_props: s1, property: p1)
-    success2 = Atom.create(stuff_w_props: s2, property: p2)
+    success1 = Atom.create(stuff_w_props: s1, satisfies: p1)
+    success2 = Atom.create(stuff_w_props: s2, satisfies: p2)
 
     expect(success1.save).to be(true)
     expect(success2.save).to be(true)

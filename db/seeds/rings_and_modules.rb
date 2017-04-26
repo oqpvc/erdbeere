@@ -123,7 +123,7 @@ mp = {}
   end.to_atom
 end
 
-base_ring_is_lnoeth = Atom.create(stuff_w_props: base_ring, property:
+base_ring_is_lnoeth = Atom.create(stuff_w_props: base_ring, satisfies:
                                                                rp['left Noetherian'].property)
 
 [base_ring_is_lnoeth, mp['finitely generated']].implies! mp['ACC for submodules']

@@ -16,11 +16,11 @@ RSpec.describe Example, type: :model do
     as = {}
     [s, b1, b2].each do |i|
       ps[i] = [create(:property, structure: i.structure), create(:property, structure: i.structure)]
-      as[i] = [Atom.create(stuff_w_props: i, property: ps[i].first), Atom.create(stuff_w_props: i, property: ps[i].second)]
+      as[i] = [Atom.create(stuff_w_props: i, satisfies: ps[i].first), Atom.create(stuff_w_props: i, satisfies: ps[i].second)]
     end
 
-    ExampleFact.create(example: e_for_b1, property: as[b1].first.property, satisfied: true)
-    ExampleFact.create(example: e_for_b2, property: as[b2].first.property, satisfied: true)
+    ExampleFact.create(example: e_for_b1, property: ps[b1].first, satisfied: true)
+    ExampleFact.create(example: e_for_b2, property: ps[b2].first, satisfied: true)
     [as[b1].first, as[b2].first].implies! as[s].first
     expect(e_for_s.satisfies?(as[s].first)).to be(true)
     expect(e_for_s.satisfies?(as[s].second)).to be(false)

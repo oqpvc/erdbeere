@@ -25,10 +25,12 @@ class Example < ApplicationRecord
   end
 
   def hardcoded_flat_truths_as_properties
+    # TODO deep atoms
     hardcoded_flat_truths.map(&:property)
   end
 
   def hardcoded_falsehoods_as_properties
+    # TODO deep atoms
     hardcoded_flat_falsehoods.map(&:property)
   end
 
@@ -40,13 +42,13 @@ class Example < ApplicationRecord
         # those sub facts are now of the wrong type: the resulting Atoms have
         # stuff_w_props = bbr.realization.structure, not the building block we want!
         sub_facts.map do |st|
-          Atom.find_or_create_by(stuff_w_props: bbr.building_block, property: st.property)
+          Atom.find_or_create_by(stuff_w_props: bbr.building_block, satisfies: st.satisfies)
         end
       end
     end
 
     a += example_facts.where(satisfied: test).map do |et|
-      Atom.find_or_create_by(stuff_w_props: structure, property: et.property)
+      Atom.find_or_create_by(stuff_w_props: structure, satisfies: et.property)
     end.to_a
 
     a.flatten
@@ -76,9 +78,10 @@ class Example < ApplicationRecord
   def violated_properties(with_implications: false)
     sat = satisfied_atoms
 
+    # TODO deep atoms
     exclusions = sat.to_a.find_all do |a|
       a.stuff_w_props == structure
-    end.map(&:property_id)
+    end.map(&:satisfies_id)
 
     exclusions += hardcoded_falsehoods_as_properties.map(&:id)
 

@@ -5,17 +5,18 @@ class Atom < ApplicationRecord
   has_many :implications, through: :premises
 
   belongs_to :stuff_w_props, polymorphic: true
-  belongs_to :property
+  belongs_to :satisfies, polymorphic: true
+  has_many :atoms, as: :satisfies
 
   validates :stuff_w_props, presence: true
-  validates :property, presence: true
-  validates_with EqualityTest, a: 'property.structure', b: 'stuff_w_props.structure'
-  validates :property, uniqueness: { scope: :stuff_w_props }
+  validates :satisfies, presence: true
+  validates :satisfies_id, uniqueness: { scope: [:stuff_w_props, :satisfies_type] }
+  validates_with EqualityTest, a: 'satisfies.structure', b: 'stuff_w_props.structure'
 
   after_commit :touch_potentially_relevant_examples
 
   def touch_potentially_relevant_examples
-    Example.where(structure: property.structure).map(&:touch)
+    Example.where(structure: satisfies.structure).map(&:touch)
   end
 
   def to_s
@@ -35,5 +36,14 @@ class Atom < ApplicationRecord
 
   def is_equivalent!(atoms)
     [self].is_equivalent! atoms
+  end
+
+  def structure
+    stuff_w_props.structure
+  end
+
+  def property
+    nil unless satisfies.is_a?(Property)
+    satisfies
   end
 end

@@ -28,7 +28,7 @@ FactoryGirl.define do
     end
 
     before(:create) do |a|
-      a.property = FactoryGirl.create(:property, structure: a.stuff_w_props.structure)
+      a.satisfies = FactoryGirl.create(:property, structure: a.stuff_w_props.structure)
     end
   end
 
