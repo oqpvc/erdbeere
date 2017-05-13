@@ -8,21 +8,26 @@
     <%= favicon_link_tag '/favicon.ico' %>
   </head>
   <body>
-    <nav class="nav">
-      <div class="nav-left">
-        <h1><%= link_to "ErDBeere", :root, class: "nav-item" %></h1>
-      </div>
-      <div class="nav-center">
-        <div class="nav-item">
-          <a href="<%= main_search_path %>" class="button is-info is-outlined">
-            <span class="icon">
-              <i class="fa fa-search"></i>
-            </span>
-            <span><%= t('layouts.application.search') %></span>
+    <div class="container">
+      <nav class="nav">
+        <div class="nav-left">
+          <a href="/" class="nav-item">
+            <img src="/erdbeere.png">
+            <h1>ErDBeere</h1>
           </a>
         </div>
-      </div>
-    </nav>
+        <div class="nav-center">
+          <div class="nav-item">
+            <a href="<%= main_search_path %>" class="button is-info is-outlined">
+              <span class="icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <span><%= t('layouts.application.search') %></span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
     <% if flash.any? %>
       <% if not flash[:error].blank? %>
         <%= render("main/hero", class_modifier: "is-danger", subtitle: I18n.t("layouts.application.error"), title: flash[:error])%>
