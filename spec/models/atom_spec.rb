@@ -74,7 +74,27 @@ RSpec.describe Atom, type: :model do
     success1 = Atom.create(stuff_w_props: s1, satisfies: p1)
     success2 = Atom.create(stuff_w_props: s2, satisfies: p2)
 
-    expect(success1.save).to be(true)
-    expect(success2.save).to be(true)
+    success1.save!
+    success2.save!
+  end
+
+  it 'allows the creation of deep atoms' do
+    s1 = create(:structure) # like endomorphism
+    s2 = create(:structure) # like vector space
+    p = create(:property) # like algebraically closed
+    s3 = p.structure # like field
+
+    # like underlying vector space of an endomorphism
+    bb1 = create(:building_block, explained_structure: s1, structure: s2)
+    # like ground field of a vector space
+    bb2 = create(:building_block, explained_structure: s2, structure: s3)
+
+    # ground field of a vector space is alg closed
+    x = Atom.create(stuff_w_props: bb2, satisfies: p)
+    # underlying vs of endo satisfies x
+    y = Atom.create(stuff_w_props: bb1, satisfies: x)
+    y.save!
+    z = Atom.create(stuff_w_props: s1, satisfies: y)
+    z.save!
   end
 end

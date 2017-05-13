@@ -42,7 +42,11 @@ class Example < ApplicationRecord
         # those sub facts are now of the wrong type: the resulting Atoms have
         # stuff_w_props = bbr.realization.structure, not the building block we want!
         sub_facts.map do |st|
-          Atom.find_or_create_by(stuff_w_props: bbr.building_block, satisfies: st.satisfies)
+          if st.stuff_w_props.is_a?(Structure)
+            Atom.find_or_create_by(stuff_w_props: bbr.building_block, satisfies: st.satisfies)
+          else
+            st
+          end
         end
       end
     end
