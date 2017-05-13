@@ -36,7 +36,7 @@ should also work just fine.) Use the environment variable `SECRET_KEY_BASE`.
 The following commands should yield a working installation:
 
 ```sh
-docker create -e "SECRET_KEY_BASE=production" --name erdbeere -p 3000:3000 oqpvc/erdbeere
+docker create -e "SECRET_KEY_BASE=verylongsecret" --name erdbeere -p 3000:3000 oqpvc/erdbeere
 docker start erdbeere
 ```
 
