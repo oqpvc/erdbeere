@@ -31,19 +31,13 @@ examples* and *abstract implications*, in the nicest possible manner.
 ## Installation
 
 Installation is easiest via docker (although `git clone && bundle install`
-should also work just fine.) Use the following environment variables:
-
-- RAILS_ENV
-- SECRET_KEY_BASE
-- PRODUCTION_DATABASE_URL
+should also work just fine.) Use the environment variable `SECRET_KEY_BASE`.
 
 The following commands should yield a working installation:
 
 ```sh
-docker create -e "RAILS_ENV=production" -e … --name erdbeere -p 3000:3000 oqpvc/erdbeere
+docker create -e "SECRET_KEY_BASE=production" --name erdbeere -p 3000:3000 oqpvc/erdbeere
 docker start erdbeere
-docker exec erdbeere bundle exec rake db:schema:load
-docker exec erdbeere bundle exec rake db:seed
 ```
 
 ## Data Structures

@@ -13,6 +13,7 @@ gem 'globalize', git: 'https://github.com/globalize/globalize'
 gem 'globalize-accessors'
 gem 'i18n-tasks', '~> 0.9.13'
 gem 'rails-i18n'
+gem 'sqlite3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
@@ -49,11 +50,6 @@ group :development, :test do
   gem 'faker', git: 'https://github.com/stympy/faker'
   gem 'rake'
   gem 'rspec-rails'
-  gem 'sqlite3'
-end
-
-group :production do
-  gem 'pg'
 end
 
 group :development do
