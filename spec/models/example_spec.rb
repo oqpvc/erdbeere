@@ -36,6 +36,17 @@ RSpec.describe Example, type: :model do
     expect(et.reload_example.violates?(b)).to be(true)
   end
 
+  it 'yields same result if called with_implications or not' do
+    et = create(:example_fact, satisfied: false)
+    a = create(:property, structure: et.example.structure).to_atom
+    b = create(:property, structure: et.example.structure).to_atom
+    a.implies! b
+    b.implies! et.property.to_atom
+    vp = et.reload_example.violated_properties
+    vpwi = et.reload_example.violated_properties(with_implications: true)
+    expect(vp == vpwi.first).to be(true)
+  end
+  
   it 'knows how to derive satisfied properties from deep atoms' do
     s1 = create(:structure) # like endomorphism
     e_for_s1 = create(:example, structure: s1)
