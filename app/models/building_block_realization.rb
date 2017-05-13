@@ -6,5 +6,5 @@ class BuildingBlockRealization < ApplicationRecord
   validates :example, presence: true
   validates :building_block, presence: true
   validates :realization, presence: true
-  validates_with EqualityTest, a: 'building_block.structure', b: 'realization.structure'
+  validates_with IncludesTest, a: 'building_block.structure.related_structures', b: 'realization.structure'
 end

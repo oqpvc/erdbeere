@@ -46,7 +46,7 @@ RSpec.describe Example, type: :model do
     vpwi = et.reload_example.violated_properties(with_implications: true)
     expect(vp == vpwi.first).to be(true)
   end
-  
+
   it 'knows how to derive satisfied properties from deep atoms' do
     s1 = create(:structure) # like endomorphism
     e_for_s1 = create(:example, structure: s1)
@@ -77,5 +77,14 @@ RSpec.describe Example, type: :model do
 
     e_for_s3.satisfies! p
     expect(e_for_s1.satisfies?(q.to_atom)).to be(true)
+  end
+
+  it 'includes defining atoms in its truths' do
+    orig = create(:structure)
+    derived = create(:structure, derives_from: orig)
+    e = create(:example, structure: derived)
+    p = create(:property, structure: orig)
+    e.structure.defining_atoms = [p.to_atom]
+    expect(e.hardcoded_truths).to include(p.to_atom)
   end
 end

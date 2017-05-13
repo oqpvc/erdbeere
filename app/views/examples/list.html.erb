@@ -1,7 +1,7 @@
 <% provide(:title, I18n.t('examples.list.title')) %>
 <div class="tile is-ancestor">
   <div class="tile is-vertical">
-    <% Structure.all.each_slice(4) do |slice| %>
+    <% Structure.all.each_slice(3) do |slice| %>
       <div class="tile is-parent">
         <% slice.each do |s| %>
           <article class="tile is-child content">

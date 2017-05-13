@@ -20,9 +20,7 @@
           <h3 class="title"><%= I18n.t("examples.show.hardcoded_truths", :default => "Hardcoded Truths") %></h3>
           <ul>
             <% @example.hardcoded_flat_truths.each do |atom| %>
-              <% if atom.stuff_w_props == @example.structure %>
-                <%= render 'atoms/show', :atom => atom, :modifier => t('logic.is') %>
-              <% end %>
+              <%= render 'atoms/show', :atom => atom, :modifier => t('logic.is') %>
             <% end %>
           </ul>
         </div>

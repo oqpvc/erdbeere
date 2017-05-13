@@ -3,10 +3,10 @@
 class AtomValidator < ActiveModel::Validator
   def validate(a)
     if a.satisfies.is_a?(Property)
-      return if a.satisfies.structure == a.stuff_w_props.structure
+      return if a.satisfies.structure.related_structures.include?(a.stuff_w_props.structure)
       a.errors[:base] << 'Type mismatch between satisfies.structure and stuff_w_props.structure'
     elsif a.satisfies.is_a?(Atom)
-      return if a.stuff_w_props.structure.building_blocks.map(&:structure).include?(a.satisfies.structure)
+      return if a.stuff_w_props.structure.building_blocks.map(&:structure).map(&:related_structures).flatten.include?(a.satisfies.structure)
       a.errors[:base] << 'There is no building block that matches satisfies.structure'
     else
       a.errors[:base] << 'Something srsly fucked up happened'
@@ -31,9 +31,7 @@ class Atom < ApplicationRecord
   after_create :create_trivial_implications
 
   def create_trivial_implications
-    if satisfies.is_a?(Atom)
-      satisfies.implies! self
-    end
+    satisfies.implies! self if satisfies.is_a?(Atom)
   end
 
   def touch_potentially_relevant_examples
@@ -64,7 +62,12 @@ class Atom < ApplicationRecord
   end
 
   def property
-    nil unless satisfies.is_a?(Property)
+    return satisfies.property unless satisfies.is_a?(Property)
     satisfies
+  end
+
+  def deep_stuff_w_props_name
+    return stuff_w_props.name if satisfies.is_a?(Property)
+    stuff_w_props.name + '.' + satisfies.stuff_w_props.name
   end
 end

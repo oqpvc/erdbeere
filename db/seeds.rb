@@ -8,6 +8,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-%w[rings_and_modules schemes].each do |f|
+%w[rings_and_modules schemes vectorspaces].each do |f|
   load(Rails.root.join('db', 'seeds', "#{f}.rb"))
 end

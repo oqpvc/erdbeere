@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426162250) do
+ActiveRecord::Schema.define(version: 20170513162453) do
 
   create_table "atoms", force: :cascade do |t|
     t.string   "stuff_w_props_type"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20170426162250) do
     t.index ["satisfies_id"], name: "index_atoms_on_satisfies_id"
     t.index ["satisfies_type", "satisfies_id"], name: "index_atoms_on_satisfies_type_and_satisfies_id"
     t.index ["stuff_w_props_type", "stuff_w_props_id"], name: "index_atoms_on_stuff_w_props_type_and_stuff_w_props_id"
+  end
+
+  create_table "axioms", force: :cascade do |t|
+    t.integer  "structure_id"
+    t.integer  "atom_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["atom_id"], name: "index_axioms_on_atom_id"
+    t.index ["structure_id"], name: "index_axioms_on_structure_id"
   end
 
   create_table "building_block_realizations", force: :cascade do |t|
@@ -136,8 +145,10 @@ ActiveRecord::Schema.define(version: 20170426162250) do
   end
 
   create_table "structures", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "derives_from_id"
+    t.index ["derives_from_id"], name: "index_structures_on_derives_from_id"
   end
 
 end

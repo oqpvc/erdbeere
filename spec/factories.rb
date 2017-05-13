@@ -1,6 +1,10 @@
 require 'faker'
 
 FactoryGirl.define do
+  factory :axiom do
+    structure nil
+    atom nil
+  end
   factory :structure do
     name { Faker::RickAndMorty.character }
     definition { Faker::RickAndMorty.quote }

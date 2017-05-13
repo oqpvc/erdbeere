@@ -1,5 +1,6 @@
 <% modifier = t('logic.is') if local_assigns[:modifier].nil? %>
 <% success = 'success' if local_assigns[:success].nil? %>
+<% unless atom.property.nil? %>
 <% if local_assigns[:implication].nil? %>
   <li>
     <%= render("atoms/inline_atom", atom: atom, modifier: modifier, success: success) %>
@@ -16,4 +17,5 @@
     </a>
     <%= render("implications/inline_message", implication: implication, success: success) %>
   </p>
+<% end %>
 <% end %>

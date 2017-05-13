@@ -2,4 +2,4 @@
 <% delim_open = '' if local_assigns[:delim_open].nil? %>
 <% fullstop = '.' if local_assigns[:delim_close].nil? %>
 <% delim_close = '' if local_assigns[:delim_close].nil? %>
-<%= delim_open %><%= atom.stuff_w_props.name %> <strong><%= modifier %></strong> <%= atom.property.name %><%= fullstop %><%= delim_close %>
+<%= delim_open %><%= atom.deep_stuff_w_props_name %> <strong><%= modifier %></strong> <%= atom.property.name %><%= fullstop %><%= delim_close %>

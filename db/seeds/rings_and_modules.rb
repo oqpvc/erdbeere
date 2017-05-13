@@ -99,7 +99,7 @@ comm_not_noeth.satisfies! [rp['commutative'], rp['unitary']]
 comm_not_noeth.violates! [rp['left Noetherian'], rp['absolutely flat']]
 
 rmod = Structure.create do |s|
-  s.name_en = '$R$-(left-)Module'
+  s.name_en = '$R$-(left-)module'
   s.name_de = '$R$-(links-)Modul'
 end
 
@@ -142,7 +142,7 @@ zee_r.satisfies! mp['finitely generated']
 fg_not_noeth_mod = Example.create do |e|
   e.structure = rmod
   e.description_en = '$\mathbb Z[X_1, X_2, \dots]$ as a module over itself'
-  e.description_de = '$\mathbb Z[X_1, X_2, \dots]$ als Module über sich selbst'
+  e.description_de = '$\mathbb Z[X_1, X_2, \dots]$ als Modul über sich selbst'
 end
 
 BuildingBlockRealization.create(example: fg_not_noeth_mod, building_block: base_ring, realization: comm_not_noeth)
