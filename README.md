@@ -60,9 +60,11 @@ end
 unitary = Property.create do |p|
   p.name = 'unitary'
   p.structure = ring
-  p..definition = '…'
+  p.definition = '…'
 end
-…
+
+# …
+
 l_noeth = Property.create(name: 'left Noetherian', structure: ring)
 r_noeth = Property.create(name: 'right Noetherian', structure: ring)
 comm = Property.create(name: 'commutative', structure: ring)
@@ -109,7 +111,7 @@ the following code snippet:
 
 ```ruby
 zee = Example.create(structure: ring)
-zee.satisfies! [comm, l_noeth, vnr]
+zee.satisfies! [comm, l_noeth]
 zee.violates! vnr
 
 zee_r = Example.create(structure: rmod)
@@ -125,14 +127,14 @@ hence very slow, which still might be fast enough for practical purposes.
 Working with it roughly looks like this:
 
 ```ruby
-[comm, l_noeth].is_equivalent! [comm, r_noeth]
+[comm.to_atom, l_noeth.to_atom].is_equivalent! [comm.to_atom, r_noeth.to_atom]
 
 zee_r.satisfies?(module_has_acc)
 zee_r.satisfies?(Atom.find_or_create_by(stuff_w_props:
                                                    base_ring,
                                                    satisfies:
                                                    r_noeth))
-zee_r.all_that_is_true.each do |a|
+zee_r.satisfied_atoms.each do |a|
   puts a.to_s
 end
 ```
