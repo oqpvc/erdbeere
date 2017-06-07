@@ -3,7 +3,7 @@
 
 ring = Structure.all.to_a.find { |s| s.name_en == 'Ring' }
 rmod = Structure.all.to_a.find { |s| s.name_en == '$R$-(left-)module' }
-field_property = Property.all.to_a.find { |p| p.name_en == 'field' }
+field_property = Property.all.to_a.find { |p| p.name_en == 'field' && p.structure== ring}
 base_ring = BuildingBlock.all.to_a.find{ |bb| bb.name_en == 'base ring' }
 
 field = Structure.create do |f|
