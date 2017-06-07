@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20170513162453) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["structure_id"], name: "index_properties_on_structure_id"
+    t.string "stackstag"
   end
 
   create_table "property_translations", force: :cascade do |t|

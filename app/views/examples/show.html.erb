@@ -69,7 +69,7 @@
         <article class="tile is-child notification is-danger">
           <div class="content">
             <h3 class="title"><%= I18n.t("examples.show.derived_falsehoods") %></h3>
-            <%  @example.computable_violations_with_implications.second.each_pair do |implication, atom| %>
+            <%  @example.computable_violations_with_implications.second.each_pair do |atom, implication| %>
               <% unless @example.hardcoded_falsehoods.include?(atom) %>
                 <%= render 'atoms/show', atom: atom, modifier: t('logic.is_not'), implication: implication, success: 'danger' %>
               <% end %>
