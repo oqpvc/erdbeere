@@ -122,11 +122,11 @@ mp = {}
     p.structure = rmod
   end.to_atom
 end
+bra= {}
+bra.copy_implications(rp,base_ring)
 
-base_ring_is_lnoeth = Atom.create(stuff_w_props: base_ring, satisfies:
-                                                               rp['left Noetherian'].property)
 
-[base_ring_is_lnoeth, mp['finitely generated']].implies! mp['ACC for submodules']
+[bra['left Noetherian'], mp['finitely generated']].implies! mp['ACC for submodules']
 
 zee_r = Example.create do |e|
   e.structure = rmod

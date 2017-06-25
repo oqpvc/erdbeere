@@ -90,3 +90,18 @@ class Array
     end
   end
 end
+class Hash
+  def copy_implications(hash, buildingblock)
+    hash.each do |p_name, p|
+      self[p_name] =   Atom.create do |a|
+        a.stuff_w_props = buildingblock
+        a.satisfies = p.property
+      end
+    end
+    Implication.all.to_a.each do |im| 
+      if hash.has_value?(im.implies) 
+        Implication.create(atoms: self.select{|k,v| im.atoms.include?(hash[k])}.values, implies: self.select{|k,v| im.implies==hash[k]}.values.first)
+      end
+    end
+  end
+end

@@ -58,7 +58,7 @@
           <div class="content">
             <h3 class="title"><%= I18n.t("examples.show.derived_truths", :default => "Derived truths") %></h3>
             <% @example.satisfied_atoms_with_implications.second.each_pair do |implication, atom| %>
-              <% unless @example.hardcoded_truths.include?(atom) %>
+              <% unless @example.hardcoded_truths.include?(atom) || atom.stuff_w_props.is_a?(BuildingBlock) %>
                 <%= render 'atoms/show', atom: atom, modifier: t('logic.is'), implication: implication %>
               <% end %>
             <% end %>
