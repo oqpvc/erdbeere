@@ -93,6 +93,7 @@ class Example < ApplicationRecord
 
     exclusions += hardcoded_falsehoods_as_properties.map(&:id)
 
+    
     props = Property.where('structure_id = ?', structure.id)
     props = props.where.not(id: exclusions)
 
@@ -105,9 +106,10 @@ class Example < ApplicationRecord
       props.to_a.each do |p|
         nsat_w_i = (sat + [p.to_atom]).all_that_follows_with_implications
         next if (nsat_w_i.first & hardcoded_falsehoods).empty?
-        violated_atom = (nsat_w_i.first & hardcoded_falsehoods).first
-        used_implications[nsat_w_i.second.key(violated_atom)] = p.to_atom
+        violated_atom = (nsat_w_i.first & hardcoded_falsehoods).first 
+        used_implications[p.to_atom] = nsat_w_i.second.key(violated_atom)
         bad_props.push(p)
+
       end
       return [bad_props, used_implications]
     else
